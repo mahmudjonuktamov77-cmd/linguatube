@@ -1,0 +1,27 @@
+{
+  "overview": "LinguaTube is a premium English learning app that helps users master English through long-form video content. With dual-language subtitles, vocabulary saving, quizzes, and progress tracking — all wrapped in a sleek dark mode UI inspired by YouTube, Netflix, and Duolingo.",
+  "features": [
+    "Dark mode premium UI with YouTube + Netflix + Duolingo aesthetic",
+    "Video feed with category and level filters (Podcasts, Conversations, Stories, Songs, Interviews, Beginner/Intermediate/Advanced)",
+    "Video player with English + Uzbek/Russian dual subtitles",
+    "Playback controls: play/pause, speed control, rewind 10s, repeat sentence",
+    "Save vocabulary words directly from video subtitles",
+    "Vocabulary page with saved words list",
+    "Quiz page with multiple-choice questions from watched content",
+    "Profile page with learning progress, stats, and settings",
+    "Bottom navigation across all main pages",
+    "Language selection: Uzbek and Russian translation support"
+  ],
+  "category": "education",
+  "tags": [
+    "english-learning",
+    "video",
+    "language",
+    "education",
+    "vocabulary",
+    "quiz",
+    "dark-mode",
+    "mobile"
+  ],
+  "last_updated": "2026-05-15T13:16:18.099Z"
+}

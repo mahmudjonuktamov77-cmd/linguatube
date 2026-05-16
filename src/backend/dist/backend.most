@@ -1,0 +1,76 @@
+// Version: 1.0.0
+type Data__791452850<K, V> =
+  {var count : Nat__490723111; kvs : [var ?(K, V)]};
+type Internal__8484328<K, V> =
+  {children : [var ?Node__46230540<K, V>]; data : Data__791452850<K, V>};
+type Language__22065978 = {#Russian; #Uzbek};
+type Leaf__809889148<K, V> = {data : Data__791452850<K, V>};
+type List__415060402<T> = List__790383201<T>;
+type List__790383201<T> =
+  {
+    var blockIndex : Nat__490723111;
+    var blocks : [var [var ?T]];
+    var elementIndex : Nat__490723111
+  };
+type Nat__490723111 = Nat__920180692;
+type Nat__920180692 = Nat;
+type Node__46230540<K, V> =
+  {#internal : Internal__8484328<K, V>; #leaf : Leaf__809889148<K, V>};
+type QuizResult__403667055 =
+  {
+    correctAnswers : Nat;
+    id : Nat;
+    score : Nat;
+    takenAt : Timestamp__301639476;
+    totalQuestions : Nat;
+    videoId : VideoId__498652803
+  };
+type Timestamp__301639476 = Int;
+type UserId__158757552 = Principal;
+type UserProfile__1009003526 =
+  {
+    var displayName : Text;
+    id : UserId__158757552;
+    var language : Language__22065978
+  };
+type VideoId__498652803 = Text;
+type VocabEntry__546750503 =
+  {
+    englishText : Text;
+    id : Nat;
+    savedAt : Timestamp__301639476;
+    sourceVideoId : VideoId__498652803;
+    translationText : Text
+  };
+type WatchedVideo__904290481 =
+  {videoId : VideoId__498652803; watchedAt : Timestamp__301639476};
+actor {
+  stable profiles :
+    {
+      var root : Node__46230540<UserId__158757552, UserProfile__1009003526>;
+      var size : Nat__490723111
+    };
+  stable quizResults :
+    {
+      var root :
+        Node__46230540<UserId__158757552,
+                        List__415060402<QuizResult__403667055>>;
+      var size : Nat__490723111
+    };
+  stable quizState : {var nextQuizId : Nat};
+  stable vocabEntries :
+    {
+      var root :
+        Node__46230540<UserId__158757552,
+                        List__415060402<VocabEntry__546750503>>;
+      var size : Nat__490723111
+    };
+  stable vocabState : {var nextVocabId : Nat};
+  stable watchedVideos :
+    {
+      var root :
+        Node__46230540<UserId__158757552,
+                        List__415060402<WatchedVideo__904290481>>;
+      var size : Nat__490723111
+    }
+};

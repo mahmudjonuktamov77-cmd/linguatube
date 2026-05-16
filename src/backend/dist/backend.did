@@ -1,0 +1,48 @@
+type WatchedVideo = 
+ record {
+   videoId: VideoId;
+   watchedAt: Timestamp;
+ };
+type VocabEntry = 
+ record {
+   englishText: text;
+   id: nat;
+   savedAt: Timestamp;
+   sourceVideoId: VideoId;
+   translationText: text;
+ };
+type VideoId = text;
+type UserId = principal;
+type Timestamp = int;
+type QuizResult = 
+ record {
+   correctAnswers: nat;
+   id: nat;
+   score: nat;
+   takenAt: Timestamp;
+   totalQuestions: nat;
+   videoId: VideoId;
+ };
+type Language = 
+ variant {
+   Russian;
+   Uzbek;
+ };
+service : {
+  getQuizResults: () -> (vec QuizResult) query;
+  getUserProfile: () ->
+   (opt record {
+          displayName: text;
+          id: UserId;
+          language: Language;
+        }) query;
+  getVocabulary: () -> (vec VocabEntry) query;
+  getWatchedVideos: () -> (vec WatchedVideo) query;
+  markVideoWatched: (videoId: VideoId) -> ();
+  saveQuizResult: (videoId: VideoId, score: nat, correctAnswers: nat,
+   totalQuestions: nat) -> ();
+  saveVocabularyWord: (englishText: text, translationText: text,
+   sourceVideoId: VideoId) -> ();
+  setDisplayName: (displayName: text) -> ();
+  setLanguagePreference: (language: Language) -> ();
+}
