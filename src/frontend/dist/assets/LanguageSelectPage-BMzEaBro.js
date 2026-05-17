@@ -1,7 +1,6 @@
-import { u as useNavigate, r as reactExports, j as jsxRuntimeExports } from "./index-DtATHlMl.js";
-import { B as Button } from "./button-DWnjlzeZ.js";
-import "./index-BspW9D6I.js";
-import "./utils-nrQbKtHB.js";
+import { u as useNavigate, r as reactExports, j as jsxRuntimeExports } from "./index-DrKPtmAy.js";
+import { B as Button } from "./button-4M12RXIM.js";
+import "./utils-UfMkDFYN.js";
 const LANGUAGES = [
   {
     id: "uzbek",

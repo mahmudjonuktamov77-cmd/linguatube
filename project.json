@@ -1,27 +1,25 @@
 {
-  "overview": "LinguaTube is a premium English learning app that helps users master English through long-form video content. With dual-language subtitles, vocabulary saving, quizzes, and progress tracking — all wrapped in a sleek dark mode UI inspired by YouTube, Netflix, and Duolingo.",
+  "overview": "LinguaTube is a mobile-first English learning app inspired by YouTube and Duolingo. Watch long-form videos with dual English and translated subtitles, save vocabulary, take quizzes, and track your progress on the leaderboard.",
   "features": [
-    "Dark mode premium UI with YouTube + Netflix + Duolingo aesthetic",
-    "Video feed with category and level filters (Podcasts, Conversations, Stories, Songs, Interviews, Beginner/Intermediate/Advanced)",
-    "Video player with English + Uzbek/Russian dual subtitles",
-    "Playback controls: play/pause, speed control, rewind 10s, repeat sentence",
-    "Save vocabulary words directly from video subtitles",
-    "Vocabulary page with saved words list",
-    "Quiz page with multiple-choice questions from watched content",
-    "Profile page with learning progress, stats, and settings",
-    "Bottom navigation across all main pages",
-    "Language selection: Uzbek and Russian translation support"
+    "Video player with dual subtitles (English + Uzbek/Russian)",
+    "Podcast/audio-only mode with background audio",
+    "Persistent login with email/password and simulated Google login",
+    "15-question English quiz",
+    "Top Users leaderboard with ranks, points, and streaks",
+    "Admin video upload (mahmudjonuktamov77@gmail.com)",
+    "Vocabulary saving and review",
+    "Dark mode premium UI"
   ],
   "category": "education",
   "tags": [
     "english-learning",
-    "video",
-    "language",
-    "education",
-    "vocabulary",
+    "language-app",
+    "video-player",
     "quiz",
+    "leaderboard",
+    "vocabulary",
     "dark-mode",
     "mobile"
   ],
-  "last_updated": "2026-05-15T13:16:18.099Z"
+  "last_updated": "2026-05-17T14:19:12.705Z"
 }

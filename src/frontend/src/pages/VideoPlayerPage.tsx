@@ -9,10 +9,13 @@ import {
   BookmarkPlus,
   ChevronLeft,
   ChevronRight,
+  Headphones,
   Pause,
   Play,
   Repeat2,
   RotateCcw,
+  Volume2,
+  VolumeX,
   X,
 } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
@@ -163,16 +166,36 @@ export default function VideoPlayerPage() {
   const [speed, setSpeed] = useState<(typeof SPEEDS)[number]>(1);
   const [showWordPicker, setShowWordPicker] = useState(false);
   const [justSaved, setJustSaved] = useState(false);
+  const [isMuted, setIsMuted] = useState(false);
+  const [isPodcastMode, setIsPodcastMode] = useState(false);
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  // Sync audio mute state
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.muted = isMuted;
+      audioRef.current.volume = 1.0;
+    }
+  }, [isMuted]);
 
   // Simulate playback
   useEffect(() => {
     if (isPlaying) {
+      // Resume audio if available
+      if (audioRef.current) {
+        audioRef.current.muted = isMuted;
+        audioRef.current.volume = 1.0;
+        audioRef.current.play().catch(() => {
+          // Browser may block autoplay — that's fine, subtitles still work
+        });
+      }
       intervalRef.current = setInterval(() => {
         setCurrentTime((t) => {
           const next = t + speed * 0.5;
           if (next >= TOTAL_DURATION) {
             setIsPlaying(false);
+            if (audioRef.current) audioRef.current.pause();
             markVideoWatched(video.id, video.title, video.duration);
             return TOTAL_DURATION;
           }
@@ -181,11 +204,12 @@ export default function VideoPlayerPage() {
       }, 500);
     } else {
       if (intervalRef.current) clearInterval(intervalRef.current);
+      if (audioRef.current) audioRef.current.pause();
     }
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isPlaying, speed, video, markVideoWatched]);
+  }, [isPlaying, speed, video, markVideoWatched, isMuted]);
 
   const activeSub = MOCK_SUBTITLES.find(
     (s) => currentTime >= s.startTime && currentTime < s.endTime,
@@ -244,6 +268,10 @@ export default function VideoPlayerPage() {
       data-ocid="video_player.page"
       className="flex flex-col min-h-screen bg-background"
     >
+      {/* Hidden audio element for real audio playback */}
+      {/* biome-ignore lint/a11y/useMediaCaption: not relevant for background audio */}
+      <audio ref={audioRef} src="" preload="none" />
+
       {/* ── Video Area ─────────────────────────────── */}
       <div className="relative w-full bg-black" style={{ aspectRatio: "16/9" }}>
         {/* Thumbnail backdrop */}
@@ -251,8 +279,29 @@ export default function VideoPlayerPage() {
           src={video.thumbnail}
           alt={video.title}
           className="absolute inset-0 w-full h-full object-cover"
-          style={{ opacity: isPlaying ? 0.35 : 0.6 }}
+          style={{ opacity: isPodcastMode ? 0.15 : isPlaying ? 0.35 : 0.6 }}
         />
+
+        {/* Podcast mode overlay */}
+        {isPodcastMode && (
+          <div className="absolute inset-0 z-20 flex flex-col items-center justify-center gap-3">
+            <div
+              className="w-20 h-20 rounded-full flex items-center justify-center"
+              style={{
+                background: "oklch(0.58 0.18 22 / 0.2)",
+                border: "2px solid oklch(0.58 0.18 22 / 0.5)",
+              }}
+            >
+              <Headphones size={36} style={{ color: "oklch(0.68 0.2 35)" }} />
+            </div>
+            <p
+              className="text-sm font-semibold tracking-wide"
+              style={{ color: "oklch(0.68 0.2 35)" }}
+            >
+              Audio Only Mode
+            </p>
+          </div>
+        )}
 
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" />
@@ -393,6 +442,35 @@ export default function VideoPlayerPage() {
           >
             <Repeat2 size={14} />
             <span>Repeat</span>
+          </button>
+
+          <button
+            type="button"
+            data-ocid="video_player.mute_button"
+            onClick={() => setIsMuted((m) => !m)}
+            className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-smooth text-xs font-medium active:scale-95"
+            aria-label={isMuted ? "Unmute" : "Mute"}
+          >
+            {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}
+          </button>
+
+          <button
+            type="button"
+            data-ocid="video_player.podcast_mode_button"
+            onClick={() => setIsPodcastMode((p) => !p)}
+            className={[
+              "flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-smooth active:scale-95",
+              isPodcastMode
+                ? "bg-primary/15 border border-primary/40 text-primary"
+                : "bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/70",
+            ].join(" ")}
+            aria-label={
+              isPodcastMode ? "Disable podcast mode" : "Enable podcast mode"
+            }
+            aria-pressed={isPodcastMode}
+          >
+            <Headphones size={14} />
+            <span>Audio</span>
           </button>
 
           <button

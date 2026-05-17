@@ -95,6 +95,16 @@ export interface WatchedVideo {
     videoId: VideoId;
 }
 export type Timestamp = bigint;
+export interface PublicUserProfile {
+    id: UserId;
+    streak: bigint;
+    displayName: string;
+    profileImage: string;
+    createdAt: Timestamp;
+    email: string;
+    language: Language;
+    points: bigint;
+}
 export type VideoId = string;
 export interface QuizResult {
     id: bigint;
@@ -116,23 +126,68 @@ export enum Language {
     Russian = "Russian"
 }
 export interface backendInterface {
+    getAllUsers(): Promise<Array<PublicUserProfile>>;
+    getIsAdmin(email: string): Promise<boolean>;
+    getLeaderboard(): Promise<Array<PublicUserProfile>>;
     getQuizResults(): Promise<Array<QuizResult>>;
-    getUserProfile(): Promise<{
-        id: UserId;
-        displayName: string;
-        language: Language;
-    } | null>;
+    getUserProfile(): Promise<PublicUserProfile | null>;
     getVocabulary(): Promise<Array<VocabEntry>>;
     getWatchedVideos(): Promise<Array<WatchedVideo>>;
     markVideoWatched(videoId: VideoId): Promise<void>;
     saveQuizResult(videoId: VideoId, score: bigint, correctAnswers: bigint, totalQuestions: bigint): Promise<void>;
     saveVocabularyWord(englishText: string, translationText: string, sourceVideoId: VideoId): Promise<void>;
     setDisplayName(displayName: string): Promise<void>;
+    setEmail(email: string): Promise<void>;
     setLanguagePreference(language: Language): Promise<void>;
+    setProfileImage(imageUrl: string): Promise<void>;
+    updateUserPoints(points: bigint): Promise<void>;
+    updateUserStreak(streak: bigint): Promise<void>;
 }
-import type { Language as _Language, UserId as _UserId } from "./declarations/backend.did.d.ts";
+import type { Language as _Language, PublicUserProfile as _PublicUserProfile, Timestamp as _Timestamp, UserId as _UserId } from "./declarations/backend.did.d.ts";
 export class Backend implements backendInterface {
     constructor(private actor: ActorSubclass<_SERVICE>, private _uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, private _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, private processError?: (error: unknown) => never){}
+    async getAllUsers(): Promise<Array<PublicUserProfile>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getAllUsers();
+                return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getAllUsers();
+            return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
+        }
+    }
+    async getIsAdmin(arg0: string): Promise<boolean> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getIsAdmin(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getIsAdmin(arg0);
+            return result;
+        }
+    }
+    async getLeaderboard(): Promise<Array<PublicUserProfile>> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.getLeaderboard();
+                return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.getLeaderboard();
+            return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
+        }
+    }
     async getQuizResults(): Promise<Array<QuizResult>> {
         if (this.processError) {
             try {
@@ -147,22 +202,18 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async getUserProfile(): Promise<{
-        id: UserId;
-        displayName: string;
-        language: Language;
-    } | null> {
+    async getUserProfile(): Promise<PublicUserProfile | null> {
         if (this.processError) {
             try {
                 const result = await this.actor.getUserProfile();
-                return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+                return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
             const result = await this.actor.getUserProfile();
-            return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+            return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
         }
     }
     async getVocabulary(): Promise<Array<VocabEntry>> {
@@ -249,61 +300,130 @@ export class Backend implements backendInterface {
             return result;
         }
     }
-    async setLanguagePreference(arg0: Language): Promise<void> {
+    async setEmail(arg0: string): Promise<void> {
         if (this.processError) {
             try {
-                const result = await this.actor.setLanguagePreference(to_candid_Language_n5(this._uploadFile, this._downloadFile, arg0));
+                const result = await this.actor.setEmail(arg0);
                 return result;
             } catch (e) {
                 this.processError(e);
                 throw new Error("unreachable");
             }
         } else {
-            const result = await this.actor.setLanguagePreference(to_candid_Language_n5(this._uploadFile, this._downloadFile, arg0));
+            const result = await this.actor.setEmail(arg0);
+            return result;
+        }
+    }
+    async setLanguagePreference(arg0: Language): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.setLanguagePreference(to_candid_Language_n7(this._uploadFile, this._downloadFile, arg0));
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.setLanguagePreference(to_candid_Language_n7(this._uploadFile, this._downloadFile, arg0));
+            return result;
+        }
+    }
+    async setProfileImage(arg0: string): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.setProfileImage(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.setProfileImage(arg0);
+            return result;
+        }
+    }
+    async updateUserPoints(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateUserPoints(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateUserPoints(arg0);
+            return result;
+        }
+    }
+    async updateUserStreak(arg0: bigint): Promise<void> {
+        if (this.processError) {
+            try {
+                const result = await this.actor.updateUserStreak(arg0);
+                return result;
+            } catch (e) {
+                this.processError(e);
+                throw new Error("unreachable");
+            }
+        } else {
+            const result = await this.actor.updateUserStreak(arg0);
             return result;
         }
     }
 }
-function from_candid_Language_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Language): Language {
-    return from_candid_variant_n4(_uploadFile, _downloadFile, value);
+function from_candid_Language_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _Language): Language {
+    return from_candid_variant_n5(_uploadFile, _downloadFile, value);
 }
-function from_candid_opt_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [{
-        id: _UserId;
-        displayName: string;
-        language: _Language;
-    }]): {
-    id: UserId;
-    displayName: string;
-    language: Language;
-} | null {
-    return value.length === 0 ? null : from_candid_record_n2(_uploadFile, _downloadFile, value[0]);
+function from_candid_PublicUserProfile_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: _PublicUserProfile): PublicUserProfile {
+    return from_candid_record_n3(_uploadFile, _downloadFile, value);
 }
-function from_candid_record_n2(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+function from_candid_opt_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: [] | [_PublicUserProfile]): PublicUserProfile | null {
+    return value.length === 0 ? null : from_candid_PublicUserProfile_n2(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_record_n3(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     id: _UserId;
+    streak: bigint;
     displayName: string;
+    profileImage: string;
+    createdAt: _Timestamp;
+    email: string;
     language: _Language;
+    points: bigint;
 }): {
     id: UserId;
+    streak: bigint;
     displayName: string;
+    profileImage: string;
+    createdAt: Timestamp;
+    email: string;
     language: Language;
+    points: bigint;
 } {
     return {
         id: value.id,
+        streak: value.streak,
         displayName: value.displayName,
-        language: from_candid_Language_n3(_uploadFile, _downloadFile, value.language)
+        profileImage: value.profileImage,
+        createdAt: value.createdAt,
+        email: value.email,
+        language: from_candid_Language_n4(_uploadFile, _downloadFile, value.language),
+        points: value.points
     };
 }
-function from_candid_variant_n4(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
+function from_candid_variant_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: {
     Uzbek: null;
 } | {
     Russian: null;
 }): Language {
     return "Uzbek" in value ? Language.Uzbek : "Russian" in value ? Language.Russian : value;
 }
-function to_candid_Language_n5(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Language): _Language {
-    return to_candid_variant_n6(_uploadFile, _downloadFile, value);
+function from_candid_vec_n1(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Array<_PublicUserProfile>): Array<PublicUserProfile> {
+    return value.map((x)=>from_candid_PublicUserProfile_n2(_uploadFile, _downloadFile, x));
 }
-function to_candid_variant_n6(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Language): {
+function to_candid_Language_n7(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Language): _Language {
+    return to_candid_variant_n8(_uploadFile, _downloadFile, value);
+}
+function to_candid_variant_n8(_uploadFile: (file: ExternalBlob) => Promise<Uint8Array>, _downloadFile: (file: Uint8Array) => Promise<ExternalBlob>, value: Language): {
     Uzbek: null;
 } | {
     Russian: null;

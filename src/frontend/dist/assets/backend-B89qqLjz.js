@@ -7,7 +7,7 @@ var __privateAdd = (obj, member, value) => member.has(obj) ? __typeError("Cannot
 var __privateSet = (obj, member, value, setter) => (__accessCheck(obj, member, "write to private field"), setter ? setter.call(obj, value) : member.set(obj, value), value);
 var __privateMethod = (obj, member, method) => (__accessCheck(obj, member, "access private method"), method);
 var _client, _currentQuery, _currentQueryInitialState, _currentResult, _currentResultState, _currentResultOptions, _currentThenable, _selectError, _selectFn, _selectResult, _lastQueryWithDefinedData, _staleTimeoutId, _refetchIntervalId, _currentRefetchInterval, _trackedProps, _QueryObserver_instances, executeFetch_fn, updateStaleTimeout_fn, computeRefetchInterval_fn, updateRefetchInterval_fn, updateTimers_fn, clearStaleTimeout_fn, clearRefetchInterval_fn, updateQuery_fn, notify_fn, _a, _client2, _currentResult2, _currentMutation, _mutateOptions, _MutationObserver_instances, updateResult_fn, notify_fn2, _b;
-import { P as ProtocolError, T as TimeoutWaitingForResponseErrorCode, f as utf8ToBytes, E as ExternalError, M as MissingRootKeyErrorCode, C as Certificate, l as lookupResultToBuffer, g as RequestStatusResponseStatus, h as UnknownError, i as RequestStatusDoneNoReplyErrorCode, k as RejectError, m as CertifiedRejectErrorCode, n as UNREACHABLE_ERROR, I as InputError, o as InvalidReadStateRequestErrorCode, p as ReadRequestType, q as Principal, s as IDL, t as MissingCanisterIdErrorCode, H as HttpAgent, v as encode, Q as QueryResponseStatus, w as UncertifiedRejectErrorCode, x as isV3ResponseBody, y as isV2ResponseBody, z as UncertifiedRejectUpdateErrorCode, A as UnexpectedErrorCode, D as decode, S as Subscribable, F as pendingThenable, G as resolveEnabled, J as shallowEqualObjects, K as resolveStaleTime, N as noop, O as environmentManager, V as isValidTimeout, W as timeUntilStale, X as timeoutManager, Y as focusManager, Z as fetchState, _ as replaceData, $ as notifyManager, a0 as hashKey, a1 as getDefaultState, r as reactExports, a2 as shouldThrowError, e as useQueryClient, a3 as useInternetIdentity, a4 as createActorWithConfig, a5 as Record, a6 as Variant, a7 as Service, a8 as Func, a9 as Vec, aa as Opt, ab as Text, ac as Nat, ad as Int, ae as Null, af as Principal$1 } from "./index-DtATHlMl.js";
+import { P as ProtocolError, f as TimeoutWaitingForResponseErrorCode, g as utf8ToBytes, E as ExternalError, M as MissingRootKeyErrorCode, C as Certificate, l as lookupResultToBuffer, h as RequestStatusResponseStatus, i as UnknownError, k as RequestStatusDoneNoReplyErrorCode, m as RejectError, n as CertifiedRejectErrorCode, o as UNREACHABLE_ERROR, I as InputError, p as InvalidReadStateRequestErrorCode, q as ReadRequestType, s as Principal, t as IDL, v as MissingCanisterIdErrorCode, H as HttpAgent, w as encode, Q as QueryResponseStatus, x as UncertifiedRejectErrorCode, y as isV3ResponseBody, z as isV2ResponseBody, A as UncertifiedRejectUpdateErrorCode, D as UnexpectedErrorCode, F as decode, S as Subscribable, G as pendingThenable, J as resolveEnabled, K as shallowEqualObjects, N as resolveStaleTime, O as noop, V as environmentManager, W as isValidTimeout, X as timeUntilStale, Y as timeoutManager, Z as focusManager, _ as fetchState, $ as replaceData, a0 as notifyManager, a1 as hashKey, a2 as getDefaultState, r as reactExports, a3 as shouldThrowError, e as useQueryClient, a4 as useInternetIdentity, a5 as createActorWithConfig, a6 as Variant, a7 as Record, a8 as Service, a9 as Func, aa as Vec, ab as Opt, ac as Null, ad as Int, ae as Text, af as Nat, ag as Principal$1, ah as Bool } from "./index-DrKPtmAy.js";
 const FIVE_MINUTES_IN_MSEC = 5 * 60 * 1e3;
 function defaultStrategy() {
   return chain(conditionalDelay(once(), 1e3), backoff(1e3, 1.2), timeout(FIVE_MINUTES_IN_MSEC));
@@ -1239,7 +1239,22 @@ function useActor(createActor2) {
     isFetching: actorQuery.isFetching
   };
 }
+const UserId = Principal$1;
 const Timestamp = Int;
+const Language = Variant({
+  "Uzbek": Null,
+  "Russian": Null
+});
+const PublicUserProfile = Record({
+  "id": UserId,
+  "streak": Nat,
+  "displayName": Text,
+  "profileImage": Text,
+  "createdAt": Timestamp,
+  "email": Text,
+  "language": Language,
+  "points": Int
+});
 const VideoId = Text;
 const QuizResult = Record({
   "id": Nat,
@@ -1248,11 +1263,6 @@ const QuizResult = Record({
   "totalQuestions": Nat,
   "correctAnswers": Nat,
   "videoId": VideoId
-});
-const UserId = Principal$1;
-const Language = Variant({
-  "Uzbek": Null,
-  "Russian": Null
 });
 const VocabEntry = Record({
   "id": Nat,
@@ -1266,30 +1276,37 @@ const WatchedVideo = Record({
   "videoId": VideoId
 });
 Service({
+  "getAllUsers": Func([], [Vec(PublicUserProfile)], ["query"]),
+  "getIsAdmin": Func([Text], [Bool], ["query"]),
+  "getLeaderboard": Func([], [Vec(PublicUserProfile)], ["query"]),
   "getQuizResults": Func([], [Vec(QuizResult)], ["query"]),
-  "getUserProfile": Func(
-    [],
-    [
-      Opt(
-        Record({
-          "id": UserId,
-          "displayName": Text,
-          "language": Language
-        })
-      )
-    ],
-    ["query"]
-  ),
+  "getUserProfile": Func([], [Opt(PublicUserProfile)], ["query"]),
   "getVocabulary": Func([], [Vec(VocabEntry)], ["query"]),
   "getWatchedVideos": Func([], [Vec(WatchedVideo)], ["query"]),
   "markVideoWatched": Func([VideoId], [], []),
   "saveQuizResult": Func([VideoId, Nat, Nat, Nat], [], []),
   "saveVocabularyWord": Func([Text, Text, VideoId], [], []),
   "setDisplayName": Func([Text], [], []),
-  "setLanguagePreference": Func([Language], [], [])
+  "setEmail": Func([Text], [], []),
+  "setLanguagePreference": Func([Language], [], []),
+  "setProfileImage": Func([Text], [], []),
+  "updateUserPoints": Func([Int], [], []),
+  "updateUserStreak": Func([Nat], [], [])
 });
 const idlFactory = ({ IDL: IDL2 }) => {
+  const UserId2 = IDL2.Principal;
   const Timestamp2 = IDL2.Int;
+  const Language2 = IDL2.Variant({ "Uzbek": IDL2.Null, "Russian": IDL2.Null });
+  const PublicUserProfile2 = IDL2.Record({
+    "id": UserId2,
+    "streak": IDL2.Nat,
+    "displayName": IDL2.Text,
+    "profileImage": IDL2.Text,
+    "createdAt": Timestamp2,
+    "email": IDL2.Text,
+    "language": Language2,
+    "points": IDL2.Int
+  });
   const VideoId2 = IDL2.Text;
   const QuizResult2 = IDL2.Record({
     "id": IDL2.Nat,
@@ -1299,8 +1316,6 @@ const idlFactory = ({ IDL: IDL2 }) => {
     "correctAnswers": IDL2.Nat,
     "videoId": VideoId2
   });
-  const UserId2 = IDL2.Principal;
-  const Language2 = IDL2.Variant({ "Uzbek": IDL2.Null, "Russian": IDL2.Null });
   const VocabEntry2 = IDL2.Record({
     "id": IDL2.Nat,
     "sourceVideoId": VideoId2,
@@ -1313,27 +1328,22 @@ const idlFactory = ({ IDL: IDL2 }) => {
     "videoId": VideoId2
   });
   return IDL2.Service({
+    "getAllUsers": IDL2.Func([], [IDL2.Vec(PublicUserProfile2)], ["query"]),
+    "getIsAdmin": IDL2.Func([IDL2.Text], [IDL2.Bool], ["query"]),
+    "getLeaderboard": IDL2.Func([], [IDL2.Vec(PublicUserProfile2)], ["query"]),
     "getQuizResults": IDL2.Func([], [IDL2.Vec(QuizResult2)], ["query"]),
-    "getUserProfile": IDL2.Func(
-      [],
-      [
-        IDL2.Opt(
-          IDL2.Record({
-            "id": UserId2,
-            "displayName": IDL2.Text,
-            "language": Language2
-          })
-        )
-      ],
-      ["query"]
-    ),
+    "getUserProfile": IDL2.Func([], [IDL2.Opt(PublicUserProfile2)], ["query"]),
     "getVocabulary": IDL2.Func([], [IDL2.Vec(VocabEntry2)], ["query"]),
     "getWatchedVideos": IDL2.Func([], [IDL2.Vec(WatchedVideo2)], ["query"]),
     "markVideoWatched": IDL2.Func([VideoId2], [], []),
     "saveQuizResult": IDL2.Func([VideoId2, IDL2.Nat, IDL2.Nat, IDL2.Nat], [], []),
     "saveVocabularyWord": IDL2.Func([IDL2.Text, IDL2.Text, VideoId2], [], []),
     "setDisplayName": IDL2.Func([IDL2.Text], [], []),
-    "setLanguagePreference": IDL2.Func([Language2], [], [])
+    "setEmail": IDL2.Func([IDL2.Text], [], []),
+    "setLanguagePreference": IDL2.Func([Language2], [], []),
+    "setProfileImage": IDL2.Func([IDL2.Text], [], []),
+    "updateUserPoints": IDL2.Func([IDL2.Int], [], []),
+    "updateUserStreak": IDL2.Func([IDL2.Nat], [], [])
   });
 };
 class Backend {
@@ -1342,6 +1352,48 @@ class Backend {
     this._uploadFile = _uploadFile;
     this._downloadFile = _downloadFile;
     this.processError = processError;
+  }
+  async getAllUsers() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getAllUsers();
+        return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getAllUsers();
+      return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
+    }
+  }
+  async getIsAdmin(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getIsAdmin(arg0);
+        return result;
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getIsAdmin(arg0);
+      return result;
+    }
+  }
+  async getLeaderboard() {
+    if (this.processError) {
+      try {
+        const result = await this.actor.getLeaderboard();
+        return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.getLeaderboard();
+      return from_candid_vec_n1(this._uploadFile, this._downloadFile, result);
+    }
   }
   async getQuizResults() {
     if (this.processError) {
@@ -1361,14 +1413,14 @@ class Backend {
     if (this.processError) {
       try {
         const result = await this.actor.getUserProfile();
-        return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+        return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
       const result = await this.actor.getUserProfile();
-      return from_candid_opt_n1(this._uploadFile, this._downloadFile, result);
+      return from_candid_opt_n6(this._uploadFile, this._downloadFile, result);
     }
   }
   async getVocabulary() {
@@ -1455,41 +1507,108 @@ class Backend {
       return result;
     }
   }
-  async setLanguagePreference(arg0) {
+  async setEmail(arg0) {
     if (this.processError) {
       try {
-        const result = await this.actor.setLanguagePreference(to_candid_Language_n5(this._uploadFile, this._downloadFile, arg0));
+        const result = await this.actor.setEmail(arg0);
         return result;
       } catch (e) {
         this.processError(e);
         throw new Error("unreachable");
       }
     } else {
-      const result = await this.actor.setLanguagePreference(to_candid_Language_n5(this._uploadFile, this._downloadFile, arg0));
+      const result = await this.actor.setEmail(arg0);
+      return result;
+    }
+  }
+  async setLanguagePreference(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.setLanguagePreference(to_candid_Language_n7(this._uploadFile, this._downloadFile, arg0));
+        return result;
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.setLanguagePreference(to_candid_Language_n7(this._uploadFile, this._downloadFile, arg0));
+      return result;
+    }
+  }
+  async setProfileImage(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.setProfileImage(arg0);
+        return result;
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.setProfileImage(arg0);
+      return result;
+    }
+  }
+  async updateUserPoints(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.updateUserPoints(arg0);
+        return result;
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.updateUserPoints(arg0);
+      return result;
+    }
+  }
+  async updateUserStreak(arg0) {
+    if (this.processError) {
+      try {
+        const result = await this.actor.updateUserStreak(arg0);
+        return result;
+      } catch (e) {
+        this.processError(e);
+        throw new Error("unreachable");
+      }
+    } else {
+      const result = await this.actor.updateUserStreak(arg0);
       return result;
     }
   }
 }
-function from_candid_Language_n3(_uploadFile, _downloadFile, value) {
-  return from_candid_variant_n4(_uploadFile, _downloadFile, value);
+function from_candid_Language_n4(_uploadFile, _downloadFile, value) {
+  return from_candid_variant_n5(_uploadFile, _downloadFile, value);
 }
-function from_candid_opt_n1(_uploadFile, _downloadFile, value) {
-  return value.length === 0 ? null : from_candid_record_n2(_uploadFile, _downloadFile, value[0]);
+function from_candid_PublicUserProfile_n2(_uploadFile, _downloadFile, value) {
+  return from_candid_record_n3(_uploadFile, _downloadFile, value);
 }
-function from_candid_record_n2(_uploadFile, _downloadFile, value) {
+function from_candid_opt_n6(_uploadFile, _downloadFile, value) {
+  return value.length === 0 ? null : from_candid_PublicUserProfile_n2(_uploadFile, _downloadFile, value[0]);
+}
+function from_candid_record_n3(_uploadFile, _downloadFile, value) {
   return {
     id: value.id,
+    streak: value.streak,
     displayName: value.displayName,
-    language: from_candid_Language_n3(_uploadFile, _downloadFile, value.language)
+    profileImage: value.profileImage,
+    createdAt: value.createdAt,
+    email: value.email,
+    language: from_candid_Language_n4(_uploadFile, _downloadFile, value.language),
+    points: value.points
   };
 }
-function from_candid_variant_n4(_uploadFile, _downloadFile, value) {
+function from_candid_variant_n5(_uploadFile, _downloadFile, value) {
   return "Uzbek" in value ? "Uzbek" : "Russian" in value ? "Russian" : value;
 }
-function to_candid_Language_n5(_uploadFile, _downloadFile, value) {
-  return to_candid_variant_n6(_uploadFile, _downloadFile, value);
+function from_candid_vec_n1(_uploadFile, _downloadFile, value) {
+  return value.map((x) => from_candid_PublicUserProfile_n2(_uploadFile, _downloadFile, x));
 }
-function to_candid_variant_n6(_uploadFile, _downloadFile, value) {
+function to_candid_Language_n7(_uploadFile, _downloadFile, value) {
+  return to_candid_variant_n8(_uploadFile, _downloadFile, value);
+}
+function to_candid_variant_n8(_uploadFile, _downloadFile, value) {
   return value == "Uzbek" ? {
     Uzbek: null
   } : value == "Russian" ? {

@@ -3,7 +3,7 @@ import { MOCK_VIDEOS } from "@/data/mockData";
 import type { Category, Level, Video } from "@/types";
 import { Link } from "@tanstack/react-router";
 import { Search } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 const CATEGORIES: { id: Category | "All"; label: string }[] = [
   { id: "All", label: "All" },
@@ -83,10 +83,22 @@ function VideoCard({ video, index }: { video: Video; index: number }) {
   );
 }
 
+function loadAllVideos(): Video[] {
+  try {
+    const custom = JSON.parse(
+      localStorage.getItem("linguatube_custom_videos") ?? "[]",
+    ) as Video[];
+    return [...custom, ...MOCK_VIDEOS];
+  } catch {
+    return MOCK_VIDEOS;
+  }
+}
+
 export default function HomePage() {
   const [activeCategory, setActiveCategory] = useState<Category | "All">("All");
   const [headerVisible, setHeaderVisible] = useState(true);
   const lastScrollY = useRef(0);
+  const allVideos = useMemo(() => loadAllVideos(), []);
 
   useEffect(() => {
     const el = document.getElementById("home-scroll-root");
@@ -108,8 +120,8 @@ export default function HomePage() {
 
   const filtered =
     activeCategory === "All"
-      ? MOCK_VIDEOS
-      : MOCK_VIDEOS.filter(
+      ? allVideos
+      : allVideos.filter(
           (v) => v.category === activeCategory || v.level === activeCategory,
         );
 

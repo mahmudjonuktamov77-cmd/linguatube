@@ -1,8 +1,7 @@
-import { j as jsxRuntimeExports, r as reactExports, L as Link } from "./index-DtATHlMl.js";
-import { S as Slot, a as cva } from "./index-BspW9D6I.js";
-import { c as cn } from "./utils-nrQbKtHB.js";
-import { M as MOCK_VIDEOS } from "./mockData-CmJHL0ad.js";
-import { S as Search } from "./search-0DdYOhyR.js";
+import { j as jsxRuntimeExports, r as reactExports, L as Link } from "./index-DrKPtmAy.js";
+import { S as Slot, c as cn, a as cva } from "./utils-UfMkDFYN.js";
+import { M as MOCK_VIDEOS } from "./mockData-Dr3JMoOm.js";
+import { S as Search } from "./search-GRc9C6H3.js";
 const badgeVariants = cva(
   "inline-flex items-center justify-center rounded-md border px-2 py-0.5 text-xs font-medium w-fit whitespace-nowrap shrink-0 [&>svg]:size-3 gap-1 [&>svg]:pointer-events-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive transition-[color,box-shadow] overflow-hidden",
   {
@@ -106,10 +105,21 @@ function VideoCard({ video, index }) {
     }
   );
 }
+function loadAllVideos() {
+  try {
+    const custom = JSON.parse(
+      localStorage.getItem("linguatube_custom_videos") ?? "[]"
+    );
+    return [...custom, ...MOCK_VIDEOS];
+  } catch {
+    return MOCK_VIDEOS;
+  }
+}
 function HomePage() {
   const [activeCategory, setActiveCategory] = reactExports.useState("All");
   const [headerVisible, setHeaderVisible] = reactExports.useState(true);
   const lastScrollY = reactExports.useRef(0);
+  const allVideos = reactExports.useMemo(() => loadAllVideos(), []);
   reactExports.useEffect(() => {
     const el = document.getElementById("home-scroll-root");
     if (!el) return;
@@ -127,7 +137,7 @@ function HomePage() {
     el.addEventListener("scroll", onScroll, { passive: true });
     return () => el.removeEventListener("scroll", onScroll);
   }, []);
-  const filtered = activeCategory === "All" ? MOCK_VIDEOS : MOCK_VIDEOS.filter(
+  const filtered = activeCategory === "All" ? allVideos : allVideos.filter(
     (v) => v.category === activeCategory || v.level === activeCategory
   );
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(

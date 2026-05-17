@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { MOCK_VIDEOS } from "@/data/mockData";
 import { useProgress } from "@/hooks/use-progress";
@@ -12,8 +15,41 @@ import {
   Moon,
   Play,
   Trophy,
+  Upload,
   User,
+  X,
 } from "lucide-react";
+import { useState } from "react";
+
+const ADMIN_EMAIL = "mahmudjonuktamov77@gmail.com";
+
+const UPLOAD_CATEGORIES = [
+  "Podcasts",
+  "Conversations",
+  "Stories",
+  "Songs",
+  "Interviews",
+  "Beginner",
+  "Intermediate",
+  "Advanced",
+] as const;
+const UPLOAD_LEVELS = ["Beginner", "Intermediate", "Advanced"] as const;
+
+interface UploadFormData {
+  title: string;
+  category: string;
+  level: string;
+  youtubeUrl: string;
+  description: string;
+}
+
+const INITIAL_FORM: UploadFormData = {
+  title: "",
+  category: "Podcasts",
+  level: "Beginner",
+  youtubeUrl: "",
+  description: "",
+};
 
 const LANG_MAP: Record<string, { label: string; flag: string }> = {
   uzbek: { label: "O'zbek", flag: "🇺🇿" },
@@ -180,6 +216,19 @@ export default function ProfilePage() {
   const navigate = useNavigate();
   const { watchedVideos, quizResults, totalMinutesLearned } = useProgress();
   const { totalWords } = useVocabulary();
+  const [showUpload, setShowUpload] = useState(false);
+  const [uploadForm, setUploadForm] = useState<UploadFormData>(INITIAL_FORM);
+  const [uploadSuccess, setUploadSuccess] = useState(false);
+
+  const authRaw = localStorage.getItem("linguatube_auth");
+  const authData = authRaw
+    ? (JSON.parse(authRaw) as {
+        email?: string;
+        name?: string;
+        profileImage?: string;
+      })
+    : null;
+  const isAdmin = authData?.email === ADMIN_EMAIL;
 
   const language = localStorage.getItem("linguatube_language") ?? "uzbek";
   const langInfo = LANG_MAP[language] ?? { label: language, flag: "🌐" };
@@ -210,17 +259,25 @@ export default function ProfilePage() {
         {/* Avatar + info */}
         <div className="flex items-center gap-4 mb-6">
           <div className="relative">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-brand flex items-center justify-center shadow-glow flex-shrink-0">
-              <User size={28} className="text-white" />
-            </div>
+            {authData?.profileImage ? (
+              <img
+                src={authData.profileImage}
+                alt={authData.name ?? "User"}
+                className="w-16 h-16 rounded-2xl object-cover shadow-glow"
+              />
+            ) : (
+              <div className="w-16 h-16 rounded-2xl bg-gradient-brand flex items-center justify-center shadow-glow flex-shrink-0">
+                <User size={28} className="text-white" />
+              </div>
+            )}
             <div className="absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-accent border-2 border-card" />
           </div>
           <div className="flex-1 min-w-0">
             <p className="font-bold text-foreground text-base">
-              Language Learner
+              {authData?.name ?? "Language Learner"}
             </p>
             <p className="text-muted-foreground text-sm mt-0.5">
-              Learning English
+              {authData?.email ?? "Learning English"}
             </p>
             <div className="inline-flex items-center gap-1.5 mt-2 px-2.5 py-1 rounded-full bg-primary/15 border border-primary/30">
               <span className="text-sm">{langInfo.flag}</span>
@@ -438,8 +495,283 @@ export default function ProfilePage() {
             onClick={() => {}}
             ocid="profile.about_button"
           />
+          {isAdmin && (
+            <button
+              type="button"
+              data-ocid="profile.upload_video_button"
+              onClick={() => {
+                setShowUpload(true);
+                setUploadSuccess(false);
+                setUploadForm(INITIAL_FORM);
+              }}
+              className="w-full flex items-center gap-3 bg-primary/10 rounded-2xl p-4 border border-primary/30 hover:border-primary/60 transition-smooth"
+            >
+              <div className="w-8 h-8 rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0">
+                <Upload size={15} className="text-primary" />
+              </div>
+              <span className="flex-1 text-primary text-sm font-semibold text-left">
+                Upload Video
+              </span>
+              <span
+                className="text-[10px] px-2 py-0.5 rounded-full font-bold"
+                style={{
+                  background: "oklch(0.58 0.18 22 / 0.15)",
+                  color: "oklch(0.7 0.18 22)",
+                }}
+              >
+                ADMIN
+              </span>
+              <ChevronRight size={16} className="text-primary flex-shrink-0" />
+            </button>
+          )}
         </div>
       </div>
+
+      {/* Upload Video Modal — centered on tablet+, sheet on mobile */}
+      {showUpload && (
+        <dialog
+          open
+          className="fixed inset-0 z-50 m-0 p-0 max-w-none max-h-none w-full h-full border-0 bg-transparent flex items-end sm:items-center justify-center px-0 sm:px-4"
+          style={{
+            background: "rgba(0,0,0,0.80)",
+            backdropFilter: "blur(8px)",
+          }}
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowUpload(false);
+          }}
+          onKeyDown={(e) => {
+            if (
+              (e.key === "Escape" || e.key === "Enter") &&
+              e.target === e.currentTarget
+            )
+              setShowUpload(false);
+          }}
+          tabIndex={-1}
+        >
+          <div
+            data-ocid="profile.upload_dialog"
+            className="w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-premium animate-fade-up"
+            style={{
+              background: "var(--card)",
+              border: "1.5px solid oklch(0.2 0.008 265)",
+              maxHeight: "88dvh",
+              display: "flex",
+              flexDirection: "column",
+            }}
+          >
+            {/* Handle (mobile drag indicator) */}
+            <div className="flex-shrink-0 pt-4 pb-0 px-6 sm:hidden">
+              <div className="w-10 h-1 rounded-full bg-border/60 mx-auto" />
+            </div>
+
+            {/* Header */}
+            <div className="flex-shrink-0 flex items-center justify-between px-6 pt-5 pb-4">
+              <h3 className="font-display font-semibold text-foreground text-lg">
+                Upload Video
+              </h3>
+              <button
+                type="button"
+                data-ocid="profile.upload_close_button"
+                onClick={() => setShowUpload(false)}
+                className="w-9 h-9 rounded-full bg-muted/60 flex items-center justify-center text-muted-foreground hover:text-foreground transition-smooth"
+                aria-label="Close"
+              >
+                <X size={15} />
+              </button>
+            </div>
+
+            {/* Scrollable body */}
+            <div
+              className="flex-1 overflow-y-auto px-6 pb-8"
+              style={{ overscrollBehavior: "contain" }}
+            >
+              {uploadSuccess ? (
+                <div
+                  data-ocid="profile.upload_success_state"
+                  className="flex flex-col items-center gap-4 py-10 text-center"
+                >
+                  <div
+                    className="w-16 h-16 rounded-full flex items-center justify-center"
+                    style={{
+                      background: "oklch(0.65 0.15 142 / 0.15)",
+                      border: "2px solid oklch(0.65 0.15 142 / 0.4)",
+                    }}
+                  >
+                    <svg
+                      width="28"
+                      height="28"
+                      viewBox="0 0 28 28"
+                      fill="none"
+                      aria-hidden="true"
+                    >
+                      <path
+                        d="M5 14L11 20L23 8"
+                        stroke="oklch(0.65 0.15 142)"
+                        strokeWidth="2.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground">
+                      Video uploaded!
+                    </p>
+                    <p className="text-muted-foreground text-sm mt-1">
+                      It will appear in the home feed.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowUpload(false)}
+                    className="text-sm text-primary hover:opacity-80 transition-smooth"
+                  >
+                    Close
+                  </button>
+                </div>
+              ) : (
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    const existing = JSON.parse(
+                      localStorage.getItem("linguatube_custom_videos") ?? "[]",
+                    ) as object[];
+                    const newVideo = {
+                      id: `custom_${Date.now()}`,
+                      title: uploadForm.title,
+                      category: uploadForm.category,
+                      level: uploadForm.level,
+                      thumbnail: uploadForm.youtubeUrl
+                        ? `https://img.youtube.com/vi/${uploadForm.youtubeUrl.match(/(?:v=|youtu\.be\/)([\w-]{11})/)?.[1] ?? "dQw4w9WgXcQ"}/mqdefault.jpg`
+                        : "https://picsum.photos/seed/custom/400/225",
+                      duration: "0:00",
+                      channelName: "Admin",
+                      channelAvatar:
+                        "https://ui-avatars.com/api/?name=Admin&background=f97316&color=fff",
+                      views: "0",
+                      uploadedAt: "Just now",
+                      description: uploadForm.description,
+                    };
+                    localStorage.setItem(
+                      "linguatube_custom_videos",
+                      JSON.stringify([newVideo, ...existing]),
+                    );
+                    setUploadSuccess(true);
+                  }}
+                  className="space-y-5"
+                >
+                  <div className="space-y-1.5">
+                    <Label className="text-foreground/80 text-sm">Title</Label>
+                    <Input
+                      data-ocid="profile.upload_title_input"
+                      placeholder="Video title"
+                      value={uploadForm.title}
+                      onChange={(e) =>
+                        setUploadForm((p) => ({ ...p, title: e.target.value }))
+                      }
+                      required
+                      className="bg-background border-border/60 h-11 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary/40 transition-smooth"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-1.5">
+                      <Label className="text-foreground/80 text-sm">
+                        Category
+                      </Label>
+                      <select
+                        data-ocid="profile.upload_category_select"
+                        value={uploadForm.category}
+                        onChange={(e) =>
+                          setUploadForm((p) => ({
+                            ...p,
+                            category: e.target.value,
+                          }))
+                        }
+                        className="w-full h-11 rounded-xl border border-border/60 bg-background text-foreground text-sm px-3 focus:border-primary focus:outline-none transition-smooth"
+                      >
+                        {UPLOAD_CATEGORIES.map((c) => (
+                          <option key={c} value={c}>
+                            {c}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="space-y-1.5">
+                      <Label className="text-foreground/80 text-sm">
+                        Level
+                      </Label>
+                      <select
+                        data-ocid="profile.upload_level_select"
+                        value={uploadForm.level}
+                        onChange={(e) =>
+                          setUploadForm((p) => ({
+                            ...p,
+                            level: e.target.value,
+                          }))
+                        }
+                        className="w-full h-11 rounded-xl border border-border/60 bg-background text-foreground text-sm px-3 focus:border-primary focus:outline-none transition-smooth"
+                      >
+                        {UPLOAD_LEVELS.map((l) => (
+                          <option key={l} value={l}>
+                            {l}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label className="text-foreground/80 text-sm">
+                      YouTube URL
+                    </Label>
+                    <Input
+                      data-ocid="profile.upload_youtube_input"
+                      placeholder="https://youtube.com/watch?v=..."
+                      value={uploadForm.youtubeUrl}
+                      onChange={(e) =>
+                        setUploadForm((p) => ({
+                          ...p,
+                          youtubeUrl: e.target.value,
+                        }))
+                      }
+                      className="bg-background border-border/60 h-11 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary/40 transition-smooth"
+                    />
+                  </div>
+
+                  <div className="space-y-1.5">
+                    <Label className="text-foreground/80 text-sm">
+                      Description
+                    </Label>
+                    <textarea
+                      data-ocid="profile.upload_description_textarea"
+                      placeholder="Brief description..."
+                      value={uploadForm.description}
+                      onChange={(e) =>
+                        setUploadForm((p) => ({
+                          ...p,
+                          description: e.target.value,
+                        }))
+                      }
+                      rows={3}
+                      className="w-full rounded-xl border border-border/60 bg-background text-foreground text-sm px-3 py-3 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/40 transition-smooth resize-none placeholder:text-muted-foreground/50"
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    data-ocid="profile.upload_submit_button"
+                    className="w-full h-12 rounded-xl text-white font-semibold text-base shadow-glow bg-gradient-brand"
+                  >
+                    <Upload size={16} className="mr-2" />
+                    Upload Video
+                  </Button>
+                </form>
+              )}
+            </div>
+          </div>
+        </dialog>
+      )}
 
       {/* Footer */}
       <div className="px-4 pb-2 mt-auto">

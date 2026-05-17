@@ -1,24 +1,43 @@
-import { c as createLucideIcon, r as reactExports, j as jsxRuntimeExports, b as useParams, u as useNavigate } from "./index-DtATHlMl.js";
-import { B as Button } from "./button-DWnjlzeZ.js";
-import { M as MOCK_VIDEOS, a as MOCK_SUBTITLES } from "./mockData-CmJHL0ad.js";
-import { u as useProgress, C as ChevronRight } from "./use-progress-D1FgCv8h.js";
-import { u as useVocabulary } from "./use-vocabulary-CWzSNDmK.js";
-import { P as Play } from "./play-BH6fhvcT.js";
-import { R as RotateCcw } from "./rotate-ccw-Ku-e3ZH0.js";
-import "./index-BspW9D6I.js";
-import "./utils-nrQbKtHB.js";
-import "./backend-4JeLCclE.js";
+import { c as createLucideIcon, r as reactExports, j as jsxRuntimeExports, b as useParams, u as useNavigate } from "./index-DrKPtmAy.js";
+import { B as Button } from "./button-4M12RXIM.js";
+import { M as MOCK_VIDEOS, a as MOCK_SUBTITLES } from "./mockData-Dr3JMoOm.js";
+import { u as useProgress, C as ChevronRight } from "./use-progress-CQP7lGn1.js";
+import { u as useVocabulary } from "./use-vocabulary-BU-v98yY.js";
+import { P as Play, X } from "./x-pmwU_wH-.js";
+import { R as RotateCcw } from "./rotate-ccw-CmW8vHc_.js";
+import "./utils-UfMkDFYN.js";
+import "./backend-B89qqLjz.js";
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$5 = [
+const __iconNode$7 = [
   ["path", { d: "m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2Z", key: "169p4p" }],
   ["path", { d: "m9 10 2 2 4-4", key: "1gnqz4" }]
 ];
-const BookmarkCheck = createLucideIcon("bookmark-check", __iconNode$5);
+const BookmarkCheck = createLucideIcon("bookmark-check", __iconNode$7);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$6 = [
+  ["path", { d: "m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z", key: "1fy3hk" }],
+  ["line", { x1: "12", x2: "12", y1: "7", y2: "13", key: "1cppfj" }],
+  ["line", { x1: "15", x2: "9", y1: "10", y2: "10", key: "1gty7f" }]
+];
+const BookmarkPlus = createLucideIcon("bookmark-plus", __iconNode$6);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$5 = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
+const ChevronLeft = createLucideIcon("chevron-left", __iconNode$5);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -26,19 +45,26 @@ const BookmarkCheck = createLucideIcon("bookmark-check", __iconNode$5);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$4 = [
-  ["path", { d: "m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z", key: "1fy3hk" }],
-  ["line", { x1: "12", x2: "12", y1: "7", y2: "13", key: "1cppfj" }],
-  ["line", { x1: "15", x2: "9", y1: "10", y2: "10", key: "1gty7f" }]
+  [
+    "path",
+    {
+      d: "M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-7a9 9 0 0 1 18 0v7a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3",
+      key: "1xhozi"
+    }
+  ]
 ];
-const BookmarkPlus = createLucideIcon("bookmark-plus", __iconNode$4);
+const Headphones = createLucideIcon("headphones", __iconNode$4);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$3 = [["path", { d: "m15 18-6-6 6-6", key: "1wnfg3" }]];
-const ChevronLeft = createLucideIcon("chevron-left", __iconNode$3);
+const __iconNode$3 = [
+  ["rect", { x: "14", y: "4", width: "4", height: "16", rx: "1", key: "zuxfzm" }],
+  ["rect", { x: "6", y: "4", width: "4", height: "16", rx: "1", key: "1okwgv" }]
+];
+const Pause = createLucideIcon("pause", __iconNode$3);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -46,10 +72,12 @@ const ChevronLeft = createLucideIcon("chevron-left", __iconNode$3);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$2 = [
-  ["rect", { x: "14", y: "4", width: "4", height: "16", rx: "1", key: "zuxfzm" }],
-  ["rect", { x: "6", y: "4", width: "4", height: "16", rx: "1", key: "1okwgv" }]
+  ["path", { d: "m2 9 3-3 3 3", key: "1ltn5i" }],
+  ["path", { d: "M13 18H7a2 2 0 0 1-2-2V6", key: "1r6tfw" }],
+  ["path", { d: "m22 15-3 3-3-3", key: "4rnwn2" }],
+  ["path", { d: "M11 6h6a2 2 0 0 1 2 2v10", key: "2f72bc" }]
 ];
-const Pause = createLucideIcon("pause", __iconNode$2);
+const Repeat2 = createLucideIcon("repeat-2", __iconNode$2);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -57,12 +85,17 @@ const Pause = createLucideIcon("pause", __iconNode$2);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1 = [
-  ["path", { d: "m2 9 3-3 3 3", key: "1ltn5i" }],
-  ["path", { d: "M13 18H7a2 2 0 0 1-2-2V6", key: "1r6tfw" }],
-  ["path", { d: "m22 15-3 3-3-3", key: "4rnwn2" }],
-  ["path", { d: "M11 6h6a2 2 0 0 1 2 2v10", key: "2f72bc" }]
+  [
+    "path",
+    {
+      d: "M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z",
+      key: "uqj9uw"
+    }
+  ],
+  ["path", { d: "M16 9a5 5 0 0 1 0 6", key: "1q6k2b" }],
+  ["path", { d: "M19.364 18.364a9 9 0 0 0 0-12.728", key: "ijwkga" }]
 ];
-const Repeat2 = createLucideIcon("repeat-2", __iconNode$1);
+const Volume2 = createLucideIcon("volume-2", __iconNode$1);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -70,10 +103,17 @@ const Repeat2 = createLucideIcon("repeat-2", __iconNode$1);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode = [
-  ["path", { d: "M18 6 6 18", key: "1bl5f8" }],
-  ["path", { d: "m6 6 12 12", key: "d8bk6v" }]
+  [
+    "path",
+    {
+      d: "M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z",
+      key: "uqj9uw"
+    }
+  ],
+  ["line", { x1: "22", x2: "16", y1: "9", y2: "15", key: "1ewh16" }],
+  ["line", { x1: "16", x2: "22", y1: "9", y2: "15", key: "5ykzw1" }]
 ];
-const X = createLucideIcon("x", __iconNode);
+const VolumeX = createLucideIcon("volume-x", __iconNode);
 const LayoutGroupContext = reactExports.createContext({});
 function useConstant(init) {
   const ref = reactExports.useRef(null);
@@ -8271,14 +8311,30 @@ function VideoPlayerPage() {
   const [speed, setSpeed] = reactExports.useState(1);
   const [showWordPicker, setShowWordPicker] = reactExports.useState(false);
   const [justSaved, setJustSaved] = reactExports.useState(false);
+  const [isMuted, setIsMuted] = reactExports.useState(false);
+  const [isPodcastMode, setIsPodcastMode] = reactExports.useState(false);
   const intervalRef = reactExports.useRef(null);
+  const audioRef = reactExports.useRef(null);
+  reactExports.useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.muted = isMuted;
+      audioRef.current.volume = 1;
+    }
+  }, [isMuted]);
   reactExports.useEffect(() => {
     if (isPlaying) {
+      if (audioRef.current) {
+        audioRef.current.muted = isMuted;
+        audioRef.current.volume = 1;
+        audioRef.current.play().catch(() => {
+        });
+      }
       intervalRef.current = setInterval(() => {
         setCurrentTime((t) => {
           const next = t + speed * 0.5;
           if (next >= TOTAL_DURATION) {
             setIsPlaying(false);
+            if (audioRef.current) audioRef.current.pause();
             markVideoWatched(video.id, video.title, video.duration);
             return TOTAL_DURATION;
           }
@@ -8287,11 +8343,12 @@ function VideoPlayerPage() {
       }, 500);
     } else {
       if (intervalRef.current) clearInterval(intervalRef.current);
+      if (audioRef.current) audioRef.current.pause();
     }
     return () => {
       if (intervalRef.current) clearInterval(intervalRef.current);
     };
-  }, [isPlaying, speed, video, markVideoWatched]);
+  }, [isPlaying, speed, video, markVideoWatched, isMuted]);
   const activeSub = MOCK_SUBTITLES.find(
     (s) => currentTime >= s.startTime && currentTime < s.endTime
   );
@@ -8332,6 +8389,7 @@ function VideoPlayerPage() {
       "data-ocid": "video_player.page",
       className: "flex flex-col min-h-screen bg-background",
       children: [
+        /* @__PURE__ */ jsxRuntimeExports.jsx("audio", { ref: audioRef, src: "", preload: "none" }),
         /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative w-full bg-black", style: { aspectRatio: "16/9" }, children: [
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "img",
@@ -8339,9 +8397,30 @@ function VideoPlayerPage() {
               src: video.thumbnail,
               alt: video.title,
               className: "absolute inset-0 w-full h-full object-cover",
-              style: { opacity: isPlaying ? 0.35 : 0.6 }
+              style: { opacity: isPodcastMode ? 0.15 : isPlaying ? 0.35 : 0.6 }
             }
           ),
+          isPodcastMode && /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "absolute inset-0 z-20 flex flex-col items-center justify-center gap-3", children: [
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "div",
+              {
+                className: "w-20 h-20 rounded-full flex items-center justify-center",
+                style: {
+                  background: "oklch(0.58 0.18 22 / 0.2)",
+                  border: "2px solid oklch(0.58 0.18 22 / 0.5)"
+                },
+                children: /* @__PURE__ */ jsxRuntimeExports.jsx(Headphones, { size: 36, style: { color: "oklch(0.68 0.2 35)" } })
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "p",
+              {
+                className: "text-sm font-semibold tracking-wide",
+                style: { color: "oklch(0.68 0.2 35)" },
+                children: "Audio Only Mode"
+              }
+            )
+          ] }),
           /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-black/80" }),
           /* @__PURE__ */ jsxRuntimeExports.jsx(
             "button",
@@ -8472,6 +8551,35 @@ function VideoPlayerPage() {
                 children: [
                   /* @__PURE__ */ jsxRuntimeExports.jsx(Repeat2, { size: 14 }),
                   /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Repeat" })
+                ]
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsx(
+              "button",
+              {
+                type: "button",
+                "data-ocid": "video_player.mute_button",
+                onClick: () => setIsMuted((m) => !m),
+                className: "flex items-center gap-1.5 px-3 py-2 rounded-xl bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/70 transition-smooth text-xs font-medium active:scale-95",
+                "aria-label": isMuted ? "Unmute" : "Mute",
+                children: isMuted ? /* @__PURE__ */ jsxRuntimeExports.jsx(VolumeX, { size: 14 }) : /* @__PURE__ */ jsxRuntimeExports.jsx(Volume2, { size: 14 })
+              }
+            ),
+            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                type: "button",
+                "data-ocid": "video_player.podcast_mode_button",
+                onClick: () => setIsPodcastMode((p) => !p),
+                className: [
+                  "flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-medium transition-smooth active:scale-95",
+                  isPodcastMode ? "bg-primary/15 border border-primary/40 text-primary" : "bg-muted/40 text-muted-foreground hover:text-foreground hover:bg-muted/70"
+                ].join(" "),
+                "aria-label": isPodcastMode ? "Disable podcast mode" : "Enable podcast mode",
+                "aria-pressed": isPodcastMode,
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(Headphones, { size: 14 }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { children: "Audio" })
                 ]
               }
             ),

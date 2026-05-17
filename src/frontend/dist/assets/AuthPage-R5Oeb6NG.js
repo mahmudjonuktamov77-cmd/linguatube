@@ -1,76 +1,8 @@
-import { r as reactExports, j as jsxRuntimeExports, R as React2, a as React, u as useNavigate } from "./index-DtATHlMl.js";
-import { B as Button } from "./button-DWnjlzeZ.js";
-import { I as Input } from "./input-CkFlCrO5.js";
-import { c as createSlot } from "./index-BspW9D6I.js";
-import { c as cn, u as useComposedRefs } from "./utils-nrQbKtHB.js";
-import { c as createContextScope, a as createSlot$1, u as useLayoutEffect2, P as Primitive$1, b as composeEventHandlers, d as useControllableState } from "./index-Dv_gk6bD.js";
-var NODES = [
-  "a",
-  "button",
-  "div",
-  "form",
-  "h2",
-  "h3",
-  "img",
-  "input",
-  "label",
-  "li",
-  "nav",
-  "ol",
-  "p",
-  "select",
-  "span",
-  "svg",
-  "ul"
-];
-var Primitive = NODES.reduce((primitive, node) => {
-  const Slot = createSlot(`Primitive.${node}`);
-  const Node = reactExports.forwardRef((props, forwardedRef) => {
-    const { asChild, ...primitiveProps } = props;
-    const Comp = asChild ? Slot : node;
-    if (typeof window !== "undefined") {
-      window[Symbol.for("radix-ui")] = true;
-    }
-    return /* @__PURE__ */ jsxRuntimeExports.jsx(Comp, { ...primitiveProps, ref: forwardedRef });
-  });
-  Node.displayName = `Primitive.${node}`;
-  return { ...primitive, [node]: Node };
-}, {});
-var NAME = "Label";
-var Label$1 = reactExports.forwardRef((props, forwardedRef) => {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Primitive.label,
-    {
-      ...props,
-      ref: forwardedRef,
-      onMouseDown: (event) => {
-        var _a;
-        const target = event.target;
-        if (target.closest("button, input, select, textarea")) return;
-        (_a = props.onMouseDown) == null ? void 0 : _a.call(props, event);
-        if (!event.defaultPrevented && event.detail > 1) event.preventDefault();
-      }
-    }
-  );
-});
-Label$1.displayName = NAME;
-var Root$1 = Label$1;
-function Label({
-  className,
-  ...props
-}) {
-  return /* @__PURE__ */ jsxRuntimeExports.jsx(
-    Root$1,
-    {
-      "data-slot": "label",
-      className: cn(
-        "flex items-center gap-2 text-sm leading-none font-medium select-none group-data-[disabled=true]:pointer-events-none group-data-[disabled=true]:opacity-50 peer-disabled:cursor-not-allowed peer-disabled:opacity-50",
-        className
-      ),
-      ...props
-    }
-  );
-}
+import { R as React2, j as jsxRuntimeExports, r as reactExports, a as React, u as useNavigate } from "./index-DrKPtmAy.js";
+import { B as Button } from "./button-4M12RXIM.js";
+import { I as Input } from "./input-DT74L0GC.js";
+import { c as createContextScope, a as createSlot, u as useLayoutEffect2, P as Primitive, b as composeEventHandlers, d as useControllableState, L as Label } from "./index-D8DwRm2I.js";
+import { u as useComposedRefs, c as cn } from "./utils-UfMkDFYN.js";
 function createCollection(name) {
   const PROVIDER_NAME = name + "CollectionProvider";
   const [createCollectionContext, createCollectionScope2] = createContextScope(PROVIDER_NAME);
@@ -86,7 +18,7 @@ function createCollection(name) {
   };
   CollectionProvider.displayName = PROVIDER_NAME;
   const COLLECTION_SLOT_NAME = name + "CollectionSlot";
-  const CollectionSlotImpl = createSlot$1(COLLECTION_SLOT_NAME);
+  const CollectionSlotImpl = createSlot(COLLECTION_SLOT_NAME);
   const CollectionSlot = React2.forwardRef(
     (props, forwardedRef) => {
       const { scope, children } = props;
@@ -98,7 +30,7 @@ function createCollection(name) {
   CollectionSlot.displayName = COLLECTION_SLOT_NAME;
   const ITEM_SLOT_NAME = name + "CollectionItemSlot";
   const ITEM_DATA_ATTR = "data-radix-collection-item";
-  const CollectionItemSlotImpl = createSlot$1(ITEM_SLOT_NAME);
+  const CollectionItemSlotImpl = createSlot(ITEM_SLOT_NAME);
   const CollectionItemSlot = React2.forwardRef(
     (props, forwardedRef) => {
       const { scope, children, ...itemData } = props;
@@ -228,7 +160,7 @@ var RovingFocusGroupImpl = reactExports.forwardRef((props, forwardedRef) => {
         []
       ),
       children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-        Primitive$1.div,
+        Primitive.div,
         {
           tabIndex: isTabbingBackOut || focusableItemsCount === 0 ? -1 : 0,
           "data-orientation": orientation,
@@ -293,7 +225,7 @@ var RovingFocusGroupItem = reactExports.forwardRef(
         focusable,
         active,
         children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Primitive$1.span,
+          Primitive.span,
           {
             tabIndex: isCurrentTabStop ? 0 : -1,
             "data-orientation": context.orientation,
@@ -525,7 +457,7 @@ var Tabs$1 = reactExports.forwardRef(
         dir: direction,
         activationMode,
         children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Primitive$1.div,
+          Primitive.div,
           {
             dir: direction,
             "data-orientation": orientation,
@@ -553,7 +485,7 @@ var TabsList$1 = reactExports.forwardRef(
         dir: context.dir,
         loop,
         children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Primitive$1.div,
+          Primitive.div,
           {
             role: "tablist",
             "aria-orientation": context.orientation,
@@ -583,7 +515,7 @@ var TabsTrigger$1 = reactExports.forwardRef(
         focusable: !disabled,
         active: isSelected,
         children: /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Primitive$1.button,
+          Primitive.button,
           {
             type: "button",
             role: "tab",
@@ -632,7 +564,7 @@ var TabsContent$1 = reactExports.forwardRef(
       return () => cancelAnimationFrame(rAF);
     }, []);
     return /* @__PURE__ */ jsxRuntimeExports.jsx(Presence, { present: forceMount || isSelected, children: ({ present }) => /* @__PURE__ */ jsxRuntimeExports.jsx(
-      Primitive$1.div,
+      Primitive.div,
       {
         "data-state": isSelected ? "active" : "inactive",
         "data-orientation": context.orientation,
@@ -721,11 +653,42 @@ function TabsContent({
     }
   );
 }
+const GOOGLE_CLIENT_ID = "170174422043-c0q1fqpqb9h04u2oi44tqr0r4s0vc3dg.apps.googleusercontent.com";
+function getRedirectUri() {
+  return `${window.location.origin}/auth`;
+}
+async function sha256(plain) {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(plain);
+  return crypto.subtle.digest("SHA-256", data);
+}
+function base64urlEncode(buffer) {
+  const bytes = new Uint8Array(buffer);
+  let str = "";
+  for (const b of bytes) str += String.fromCharCode(b);
+  return btoa(str).replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
+}
+function generateCodeVerifier() {
+  const array = new Uint8Array(32);
+  crypto.getRandomValues(array);
+  return base64urlEncode(array.buffer);
+}
+async function generateCodeChallenge(verifier) {
+  const digest = await sha256(verifier);
+  return base64urlEncode(digest);
+}
+function generateState() {
+  const array = new Uint8Array(16);
+  crypto.getRandomValues(array);
+  return base64urlEncode(array.buffer);
+}
 function AuthPage() {
   const navigate = useNavigate();
   const [forgotEmail, setForgotEmail] = reactExports.useState("");
   const [forgotState, setForgotState] = reactExports.useState("idle");
   const [showForgot, setShowForgot] = reactExports.useState(false);
+  const [googleLoading, setGoogleLoading] = reactExports.useState(false);
+  const [oauthError, setOauthError] = reactExports.useState("");
   const [loginEmail, setLoginEmail] = reactExports.useState("");
   const [loginPassword, setLoginPassword] = reactExports.useState("");
   const [regName, setRegName] = reactExports.useState("");
@@ -733,9 +696,82 @@ function AuthPage() {
   const [regPassword, setRegPassword] = reactExports.useState("");
   const [regConfirm, setRegConfirm] = reactExports.useState("");
   const [regError, setRegError] = reactExports.useState("");
+  const persistAuth = reactExports.useCallback(
+    (email, name, extra) => {
+      const payload = {
+        email,
+        name,
+        loggedIn: true,
+        loginTime: Date.now(),
+        ...extra
+      };
+      localStorage.setItem("linguatube_auth", JSON.stringify(payload));
+    },
+    []
+  );
+  reactExports.useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const returnedState = params.get("state");
+    const error = params.get("error");
+    if (error) {
+      setOauthError(
+        "Google sign-in was cancelled or failed. Please try again."
+      );
+      window.history.replaceState({}, "", "/auth");
+      return;
+    }
+    if (!code) return;
+    const savedState = sessionStorage.getItem("google_oauth_state");
+    const verifier = sessionStorage.getItem("google_pkce_verifier");
+    if (!savedState || !verifier || returnedState !== savedState) {
+      setOauthError("OAuth state mismatch. Please try again.");
+      window.history.replaceState({}, "", "/auth");
+      return;
+    }
+    sessionStorage.removeItem("google_oauth_state");
+    sessionStorage.removeItem("google_pkce_verifier");
+    window.history.replaceState({}, "", "/auth");
+    setGoogleLoading(true);
+    const body = new URLSearchParams({
+      code,
+      client_id: GOOGLE_CLIENT_ID,
+      redirect_uri: getRedirectUri(),
+      grant_type: "authorization_code",
+      code_verifier: verifier
+    });
+    fetch("https://oauth2.googleapis.com/token", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: body.toString()
+    }).then((r) => r.json()).then(async (tokens) => {
+      var _a;
+      if (!tokens.access_token) {
+        throw new Error(tokens.error ?? "No access token returned");
+      }
+      const profileRes = await fetch(
+        "https://www.googleapis.com/oauth2/v2/userinfo",
+        { headers: { Authorization: `Bearer ${tokens.access_token}` } }
+      );
+      const profile = await profileRes.json();
+      persistAuth(
+        profile.email ?? "",
+        profile.name ?? ((_a = profile.email) == null ? void 0 : _a.split("@")[0]) ?? "Google User",
+        { profileImage: profile.picture ?? "", loginMethod: "google" }
+      );
+      const hasLanguage = localStorage.getItem("linguatube_language");
+      navigate({ to: hasLanguage ? "/home" : "/language-select" });
+    }).catch((err) => {
+      console.error("Google OAuth token exchange failed:", err);
+      setOauthError("Google sign-in failed. Please try again.");
+      setGoogleLoading(false);
+    });
+  }, [navigate, persistAuth]);
   const handleLogin = (e) => {
     e.preventDefault();
-    navigate({ to: "/language-select" });
+    persistAuth(loginEmail, loginEmail.split("@")[0]);
+    const hasLanguage = localStorage.getItem("linguatube_language");
+    navigate({ to: hasLanguage ? "/home" : "/language-select" });
   };
   const handleRegister = (e) => {
     e.preventDefault();
@@ -744,11 +780,36 @@ function AuthPage() {
       return;
     }
     setRegError("");
+    persistAuth(regEmail, regName || regEmail.split("@")[0]);
     navigate({ to: "/language-select" });
   };
   const handleForgot = (e) => {
     e.preventDefault();
     setForgotState("sent");
+  };
+  const handleGoogleLogin = async () => {
+    setOauthError("");
+    try {
+      const verifier = generateCodeVerifier();
+      const challenge = await generateCodeChallenge(verifier);
+      const state = generateState();
+      sessionStorage.setItem("google_pkce_verifier", verifier);
+      sessionStorage.setItem("google_oauth_state", state);
+      const params = new URLSearchParams({
+        client_id: GOOGLE_CLIENT_ID,
+        redirect_uri: getRedirectUri(),
+        response_type: "code",
+        scope: "openid email profile",
+        code_challenge: challenge,
+        code_challenge_method: "S256",
+        state,
+        prompt: "select_account"
+      });
+      window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?${params.toString()}`;
+    } catch (err) {
+      console.error("Google OAuth init failed:", err);
+      setOauthError("Could not start Google sign-in. Please try again.");
+    }
   };
   const inputClass = "bg-card border-border/60 h-12 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary/40 transition-smooth placeholder:text-muted-foreground/50";
   return /* @__PURE__ */ jsxRuntimeExports.jsxs(
@@ -1065,7 +1126,96 @@ function AuthPage() {
                   }
                 )
               ] }),
-              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-center text-xs text-muted-foreground mt-6", children: [
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-3 my-5", children: [
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 h-px bg-border/50" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-xs text-muted-foreground/60 font-medium select-none", children: "— OR —" }),
+                /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-1 h-px bg-border/50" })
+              ] }),
+              oauthError && /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "p",
+                {
+                  "data-ocid": "auth.oauth_error_state",
+                  className: "text-destructive text-xs text-center bg-destructive/10 rounded-lg px-3 py-2",
+                  children: oauthError
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                "button",
+                {
+                  type: "button",
+                  "data-ocid": "auth.google_login_button",
+                  onClick: () => {
+                    void handleGoogleLogin();
+                  },
+                  disabled: googleLoading,
+                  className: "w-full h-12 rounded-xl border border-border/60 bg-card text-foreground font-semibold text-sm flex items-center justify-center gap-3 transition-smooth hover:bg-muted active:scale-[0.98] shadow-sm disabled:opacity-60 disabled:pointer-events-none",
+                  children: [
+                    googleLoading ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "svg",
+                      {
+                        width: "18",
+                        height: "18",
+                        viewBox: "0 0 18 18",
+                        className: "animate-spin",
+                        "aria-hidden": "true",
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                          "circle",
+                          {
+                            cx: "9",
+                            cy: "9",
+                            r: "7",
+                            fill: "none",
+                            stroke: "currentColor",
+                            strokeWidth: "2",
+                            strokeDasharray: "20 25"
+                          }
+                        )
+                      }
+                    ) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                      "svg",
+                      {
+                        width: "18",
+                        height: "18",
+                        viewBox: "0 0 18 18",
+                        fill: "none",
+                        "aria-hidden": "true",
+                        children: [
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "path",
+                            {
+                              d: "M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844c-.209 1.125-.843 2.078-1.796 2.717v2.258h2.908c1.702-1.567 2.684-3.875 2.684-6.615z",
+                              fill: "#4285F4"
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "path",
+                            {
+                              d: "M9 18c2.43 0 4.467-.806 5.956-2.18l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.711H.957v2.332A8.997 8.997 0 0 0 9 18z",
+                              fill: "#34A853"
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "path",
+                            {
+                              d: "M3.964 10.71A5.41 5.41 0 0 1 3.682 9c0-.593.102-1.17.282-1.71V4.958H.957A8.996 8.996 0 0 0 0 9c0 1.452.348 2.827.957 4.042l3.007-2.332z",
+                              fill: "#FBBC05"
+                            }
+                          ),
+                          /* @__PURE__ */ jsxRuntimeExports.jsx(
+                            "path",
+                            {
+                              d: "M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.958L3.964 6.29C4.672 4.163 6.656 3.58 9 3.58z",
+                              fill: "#EA4335"
+                            }
+                          )
+                        ]
+                      }
+                    ),
+                    googleLoading ? "Signing in…" : "Continue with Google"
+                  ]
+                }
+              ),
+              /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-center text-xs text-muted-foreground mt-5", children: [
                 "New here?",
                 " ",
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary cursor-pointer hover:opacity-80 transition-smooth", children: "Create an account" })

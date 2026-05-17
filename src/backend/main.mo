@@ -8,7 +8,9 @@ import List "mo:core/List";
 import UserApiMixin "mixins/user-api";
 import VocabApiMixin "mixins/vocabulary-api";
 import ProgressApiMixin "mixins/progress-api";
+import Migration "migration";
 
+(with migration = Migration.run)
 actor {
   let profiles = Map.empty<Common.UserId, UserTypes.UserProfile>();
   let vocabEntries = Map.empty<Common.UserId, List.List<VocabTypes.VocabEntry>>();

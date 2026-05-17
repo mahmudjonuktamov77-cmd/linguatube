@@ -25,8 +25,20 @@ export default function SplashPage() {
     }
     raf.id = requestAnimationFrame(tick);
 
-    // Navigate after 2.5s
+    // Navigate after 2.5s — skip auth if already logged in
     const navTimer = setTimeout(() => {
+      try {
+        const stored = localStorage.getItem("linguatube_auth");
+        if (stored) {
+          const auth = JSON.parse(stored) as { loggedIn?: boolean };
+          if (auth.loggedIn) {
+            navigate({ to: "/home" });
+            return;
+          }
+        }
+      } catch {
+        // ignore malformed data
+      }
       navigate({ to: "/auth" });
     }, 2500);
 
@@ -156,7 +168,7 @@ export default function SplashPage() {
           transition: "opacity 0.5s 0.3s ease, transform 0.5s 0.3s ease",
         }}
       >
-        Learn English Through Real Content
+        This app will help you improve your English level InshaAllah.
       </p>
 
       {/* Loading bar */}

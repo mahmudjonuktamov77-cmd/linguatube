@@ -12,6 +12,16 @@ import type { Principal } from '@icp-sdk/core/principal';
 
 export type Language = { 'Uzbek' : null } |
   { 'Russian' : null };
+export interface PublicUserProfile {
+  'id' : UserId,
+  'streak' : bigint,
+  'displayName' : string,
+  'profileImage' : string,
+  'createdAt' : Timestamp,
+  'email' : string,
+  'language' : Language,
+  'points' : bigint,
+}
 export interface QuizResult {
   'id' : bigint,
   'score' : bigint,
@@ -32,18 +42,22 @@ export interface VocabEntry {
 }
 export interface WatchedVideo { 'watchedAt' : Timestamp, 'videoId' : VideoId }
 export interface _SERVICE {
+  'getAllUsers' : ActorMethod<[], Array<PublicUserProfile>>,
+  'getIsAdmin' : ActorMethod<[string], boolean>,
+  'getLeaderboard' : ActorMethod<[], Array<PublicUserProfile>>,
   'getQuizResults' : ActorMethod<[], Array<QuizResult>>,
-  'getUserProfile' : ActorMethod<
-    [],
-    [] | [{ 'id' : UserId, 'displayName' : string, 'language' : Language }]
-  >,
+  'getUserProfile' : ActorMethod<[], [] | [PublicUserProfile]>,
   'getVocabulary' : ActorMethod<[], Array<VocabEntry>>,
   'getWatchedVideos' : ActorMethod<[], Array<WatchedVideo>>,
   'markVideoWatched' : ActorMethod<[VideoId], undefined>,
   'saveQuizResult' : ActorMethod<[VideoId, bigint, bigint, bigint], undefined>,
   'saveVocabularyWord' : ActorMethod<[string, string, VideoId], undefined>,
   'setDisplayName' : ActorMethod<[string], undefined>,
+  'setEmail' : ActorMethod<[string], undefined>,
   'setLanguagePreference' : ActorMethod<[Language], undefined>,
+  'setProfileImage' : ActorMethod<[string], undefined>,
+  'updateUserPoints' : ActorMethod<[bigint], undefined>,
+  'updateUserStreak' : ActorMethod<[bigint], undefined>,
 }
 export declare const idlService: IDL.ServiceClass;
 export declare const idlInitArgs: IDL.Type[];

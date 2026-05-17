@@ -1,5 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
-import { BookOpen, Brain, Home, User } from "lucide-react";
+import { BookOpen, Brain, Home, Trophy, User } from "lucide-react";
 
 const NAV_ITEMS = [
   { to: "/home", label: "Home", icon: Home, ocid: "nav.home" },
@@ -10,6 +10,7 @@ const NAV_ITEMS = [
     ocid: "nav.vocabulary",
   },
   { to: "/quiz", label: "Quiz", icon: Brain, ocid: "nav.quiz" },
+  { to: "/leaderboard", label: "Top", icon: Trophy, ocid: "nav.leaderboard" },
   { to: "/profile", label: "Profile", icon: User, ocid: "nav.profile" },
 ] as const;
 

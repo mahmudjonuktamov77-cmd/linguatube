@@ -1,4 +1,4 @@
-import { u as useNavigate, r as reactExports, j as jsxRuntimeExports } from "./index-DtATHlMl.js";
+import { u as useNavigate, r as reactExports, j as jsxRuntimeExports } from "./index-DrKPtmAy.js";
 function SplashPage() {
   const navigate = useNavigate();
   const [progress, setProgress] = reactExports.useState(0);
@@ -18,6 +18,17 @@ function SplashPage() {
     }
     raf.id = requestAnimationFrame(tick);
     const navTimer = setTimeout(() => {
+      try {
+        const stored = localStorage.getItem("linguatube_auth");
+        if (stored) {
+          const auth = JSON.parse(stored);
+          if (auth.loggedIn) {
+            navigate({ to: "/home" });
+            return;
+          }
+        }
+      } catch {
+      }
       navigate({ to: "/auth" });
     }, 2500);
     return () => {
@@ -160,7 +171,7 @@ function SplashPage() {
               transform: visible ? "translateY(0)" : "translateY(12px)",
               transition: "opacity 0.5s 0.3s ease, transform 0.5s 0.3s ease"
             },
-            children: "Learn English Through Real Content"
+            children: "This app will help you improve your English level InshaAllah."
           }
         ),
         /* @__PURE__ */ jsxRuntimeExports.jsx(

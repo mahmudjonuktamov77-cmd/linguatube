@@ -8,7 +8,22 @@
 
 import { IDL } from '@icp-sdk/core/candid';
 
+export const UserId = IDL.Principal;
 export const Timestamp = IDL.Int;
+export const Language = IDL.Variant({
+  'Uzbek' : IDL.Null,
+  'Russian' : IDL.Null,
+});
+export const PublicUserProfile = IDL.Record({
+  'id' : UserId,
+  'streak' : IDL.Nat,
+  'displayName' : IDL.Text,
+  'profileImage' : IDL.Text,
+  'createdAt' : Timestamp,
+  'email' : IDL.Text,
+  'language' : Language,
+  'points' : IDL.Int,
+});
 export const VideoId = IDL.Text;
 export const QuizResult = IDL.Record({
   'id' : IDL.Nat,
@@ -17,11 +32,6 @@ export const QuizResult = IDL.Record({
   'totalQuestions' : IDL.Nat,
   'correctAnswers' : IDL.Nat,
   'videoId' : VideoId,
-});
-export const UserId = IDL.Principal;
-export const Language = IDL.Variant({
-  'Uzbek' : IDL.Null,
-  'Russian' : IDL.Null,
 });
 export const VocabEntry = IDL.Record({
   'id' : IDL.Nat,
@@ -36,33 +46,40 @@ export const WatchedVideo = IDL.Record({
 });
 
 export const idlService = IDL.Service({
+  'getAllUsers' : IDL.Func([], [IDL.Vec(PublicUserProfile)], ['query']),
+  'getIsAdmin' : IDL.Func([IDL.Text], [IDL.Bool], ['query']),
+  'getLeaderboard' : IDL.Func([], [IDL.Vec(PublicUserProfile)], ['query']),
   'getQuizResults' : IDL.Func([], [IDL.Vec(QuizResult)], ['query']),
-  'getUserProfile' : IDL.Func(
-      [],
-      [
-        IDL.Opt(
-          IDL.Record({
-            'id' : UserId,
-            'displayName' : IDL.Text,
-            'language' : Language,
-          })
-        ),
-      ],
-      ['query'],
-    ),
+  'getUserProfile' : IDL.Func([], [IDL.Opt(PublicUserProfile)], ['query']),
   'getVocabulary' : IDL.Func([], [IDL.Vec(VocabEntry)], ['query']),
   'getWatchedVideos' : IDL.Func([], [IDL.Vec(WatchedVideo)], ['query']),
   'markVideoWatched' : IDL.Func([VideoId], [], []),
   'saveQuizResult' : IDL.Func([VideoId, IDL.Nat, IDL.Nat, IDL.Nat], [], []),
   'saveVocabularyWord' : IDL.Func([IDL.Text, IDL.Text, VideoId], [], []),
   'setDisplayName' : IDL.Func([IDL.Text], [], []),
+  'setEmail' : IDL.Func([IDL.Text], [], []),
   'setLanguagePreference' : IDL.Func([Language], [], []),
+  'setProfileImage' : IDL.Func([IDL.Text], [], []),
+  'updateUserPoints' : IDL.Func([IDL.Int], [], []),
+  'updateUserStreak' : IDL.Func([IDL.Nat], [], []),
 });
 
 export const idlInitArgs = [];
 
 export const idlFactory = ({ IDL }) => {
+  const UserId = IDL.Principal;
   const Timestamp = IDL.Int;
+  const Language = IDL.Variant({ 'Uzbek' : IDL.Null, 'Russian' : IDL.Null });
+  const PublicUserProfile = IDL.Record({
+    'id' : UserId,
+    'streak' : IDL.Nat,
+    'displayName' : IDL.Text,
+    'profileImage' : IDL.Text,
+    'createdAt' : Timestamp,
+    'email' : IDL.Text,
+    'language' : Language,
+    'points' : IDL.Int,
+  });
   const VideoId = IDL.Text;
   const QuizResult = IDL.Record({
     'id' : IDL.Nat,
@@ -72,8 +89,6 @@ export const idlFactory = ({ IDL }) => {
     'correctAnswers' : IDL.Nat,
     'videoId' : VideoId,
   });
-  const UserId = IDL.Principal;
-  const Language = IDL.Variant({ 'Uzbek' : IDL.Null, 'Russian' : IDL.Null });
   const VocabEntry = IDL.Record({
     'id' : IDL.Nat,
     'sourceVideoId' : VideoId,
@@ -87,27 +102,22 @@ export const idlFactory = ({ IDL }) => {
   });
   
   return IDL.Service({
+    'getAllUsers' : IDL.Func([], [IDL.Vec(PublicUserProfile)], ['query']),
+    'getIsAdmin' : IDL.Func([IDL.Text], [IDL.Bool], ['query']),
+    'getLeaderboard' : IDL.Func([], [IDL.Vec(PublicUserProfile)], ['query']),
     'getQuizResults' : IDL.Func([], [IDL.Vec(QuizResult)], ['query']),
-    'getUserProfile' : IDL.Func(
-        [],
-        [
-          IDL.Opt(
-            IDL.Record({
-              'id' : UserId,
-              'displayName' : IDL.Text,
-              'language' : Language,
-            })
-          ),
-        ],
-        ['query'],
-      ),
+    'getUserProfile' : IDL.Func([], [IDL.Opt(PublicUserProfile)], ['query']),
     'getVocabulary' : IDL.Func([], [IDL.Vec(VocabEntry)], ['query']),
     'getWatchedVideos' : IDL.Func([], [IDL.Vec(WatchedVideo)], ['query']),
     'markVideoWatched' : IDL.Func([VideoId], [], []),
     'saveQuizResult' : IDL.Func([VideoId, IDL.Nat, IDL.Nat, IDL.Nat], [], []),
     'saveVocabularyWord' : IDL.Func([IDL.Text, IDL.Text, VideoId], [], []),
     'setDisplayName' : IDL.Func([IDL.Text], [], []),
+    'setEmail' : IDL.Func([IDL.Text], [], []),
     'setLanguagePreference' : IDL.Func([Language], [], []),
+    'setProfileImage' : IDL.Func([IDL.Text], [], []),
+    'updateUserPoints' : IDL.Func([IDL.Int], [], []),
+    'updateUserStreak' : IDL.Func([IDL.Nat], [], []),
   });
 };
 

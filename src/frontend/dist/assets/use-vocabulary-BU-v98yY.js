@@ -1,5 +1,5 @@
-import { u as useActor, a as useQuery, b as useMutation, c as createActor } from "./backend-4JeLCclE.js";
-import { e as useQueryClient, r as reactExports } from "./index-DtATHlMl.js";
+import { u as useActor, a as useQuery, b as useMutation, c as createActor } from "./backend-B89qqLjz.js";
+import { e as useQueryClient, r as reactExports } from "./index-DrKPtmAy.js";
 const VOCAB_STORAGE_KEY = "lingua_vocab";
 function loadLocalVocab() {
   try {

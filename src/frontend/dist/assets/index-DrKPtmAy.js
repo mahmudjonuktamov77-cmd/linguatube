@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/AuthPage-eFbsCOwK.js","assets/button-DWnjlzeZ.js","assets/index-BspW9D6I.js","assets/utils-nrQbKtHB.js","assets/input-CkFlCrO5.js","assets/index-Dv_gk6bD.js","assets/LanguageSelectPage-7hpEE6me.js","assets/HomePage-B-oSAD8Y.js","assets/mockData-CmJHL0ad.js","assets/search-0DdYOhyR.js","assets/VideoPlayerPage-D8sSNGMz.js","assets/use-progress-D1FgCv8h.js","assets/backend-4JeLCclE.js","assets/use-vocabulary-CWzSNDmK.js","assets/play-BH6fhvcT.js","assets/rotate-ccw-Ku-e3ZH0.js","assets/VocabularyPage-2qz5Vnv6.js","assets/QuizPage-CRLjALDc.js","assets/trophy-BpkEYwrk.js","assets/ProfilePage-B-fqhjjZ.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/AuthPage-R5Oeb6NG.js","assets/button-4M12RXIM.js","assets/utils-UfMkDFYN.js","assets/input-DT74L0GC.js","assets/index-D8DwRm2I.js","assets/LanguageSelectPage-BMzEaBro.js","assets/HomePage-CtLYZttC.js","assets/mockData-Dr3JMoOm.js","assets/search-GRc9C6H3.js","assets/VideoPlayerPage-BuS8cJIs.js","assets/use-progress-CQP7lGn1.js","assets/backend-B89qqLjz.js","assets/use-vocabulary-BU-v98yY.js","assets/x-pmwU_wH-.js","assets/rotate-ccw-CmW8vHc_.js","assets/VocabularyPage-BPujFPSX.js","assets/QuizPage-BjcUfQA0.js","assets/ProfilePage-C6Of8Xon.js","assets/flame-wzMjBhzg.js","assets/LeaderboardPage-ChRTyPst.js"])))=>i.map(i=>d[i]);
 var __defProp = Object.defineProperty;
 var __typeError = (msg) => {
   throw TypeError(msg);
@@ -31607,7 +31607,7 @@ const createLucideIcon = (iconName, iconNode) => {
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$3 = [
+const __iconNode$4 = [
   ["path", { d: "M12 7v14", key: "1akyts" }],
   [
     "path",
@@ -31617,14 +31617,14 @@ const __iconNode$3 = [
     }
   ]
 ];
-const BookOpen = createLucideIcon("book-open", __iconNode$3);
+const BookOpen = createLucideIcon("book-open", __iconNode$4);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$2 = [
+const __iconNode$3 = [
   [
     "path",
     {
@@ -31647,14 +31647,14 @@ const __iconNode$2 = [
   ["path", { d: "M6 18a4 4 0 0 1-1.967-.516", key: "2e4loj" }],
   ["path", { d: "M19.967 17.484A4 4 0 0 1 18 18", key: "159ez6" }]
 ];
-const Brain = createLucideIcon("brain", __iconNode$2);
+const Brain = createLucideIcon("brain", __iconNode$3);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
  * This source code is licensed under the ISC license.
  * See the LICENSE file in the root directory of this source tree.
  */
-const __iconNode$1 = [
+const __iconNode$2 = [
   ["path", { d: "M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8", key: "5wwlr5" }],
   [
     "path",
@@ -31664,7 +31664,22 @@ const __iconNode$1 = [
     }
   ]
 ];
-const House = createLucideIcon("house", __iconNode$1);
+const House = createLucideIcon("house", __iconNode$2);
+/**
+ * @license lucide-react v0.511.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */
+const __iconNode$1 = [
+  ["path", { d: "M6 9H4.5a2.5 2.5 0 0 1 0-5H6", key: "17hqa7" }],
+  ["path", { d: "M18 9h1.5a2.5 2.5 0 0 0 0-5H18", key: "lmptdp" }],
+  ["path", { d: "M4 22h16", key: "57wxv0" }],
+  ["path", { d: "M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22", key: "1nw9bq" }],
+  ["path", { d: "M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22", key: "1np0yb" }],
+  ["path", { d: "M18 2H6v7a6 6 0 0 0 12 0V2Z", key: "u46fv3" }]
+];
+const Trophy = createLucideIcon("trophy", __iconNode$1);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -31685,6 +31700,7 @@ const NAV_ITEMS = [
     ocid: "nav.vocabulary"
   },
   { to: "/quiz", label: "Quiz", icon: Brain, ocid: "nav.quiz" },
+  { to: "/leaderboard", label: "Top", icon: Trophy, ocid: "nav.leaderboard" },
   { to: "/profile", label: "Profile", icon: User, ocid: "nav.profile" }
 ];
 function BottomNav() {
@@ -31730,14 +31746,15 @@ function Layout({ children }) {
     showNav && /* @__PURE__ */ jsxRuntimeExports.jsx(BottomNav, {})
   ] }) });
 }
-const SplashPage = reactExports.lazy(() => __vitePreload(() => import("./SplashPage-vy2ihqib.js"), true ? [] : void 0));
-const AuthPage = reactExports.lazy(() => __vitePreload(() => import("./AuthPage-eFbsCOwK.js"), true ? __vite__mapDeps([0,1,2,3,4,5]) : void 0));
-const LanguageSelectPage = reactExports.lazy(() => __vitePreload(() => import("./LanguageSelectPage-7hpEE6me.js"), true ? __vite__mapDeps([6,1,2,3]) : void 0));
-const HomePage = reactExports.lazy(() => __vitePreload(() => import("./HomePage-B-oSAD8Y.js"), true ? __vite__mapDeps([7,2,3,8,9]) : void 0));
-const VideoPlayerPage = reactExports.lazy(() => __vitePreload(() => import("./VideoPlayerPage-D8sSNGMz.js"), true ? __vite__mapDeps([10,1,2,3,8,11,12,13,14,15]) : void 0));
-const VocabularyPage = reactExports.lazy(() => __vitePreload(() => import("./VocabularyPage-2qz5Vnv6.js"), true ? __vite__mapDeps([16,1,2,3,4,13,12,9]) : void 0));
-const QuizPage = reactExports.lazy(() => __vitePreload(() => import("./QuizPage-CRLjALDc.js"), true ? __vite__mapDeps([17,1,2,3,8,11,12,18,15]) : void 0));
-const ProfilePage = reactExports.lazy(() => __vitePreload(() => import("./ProfilePage-B-fqhjjZ.js"), true ? __vite__mapDeps([19,5,3,8,11,12,13,14,18]) : void 0));
+const SplashPage = reactExports.lazy(() => __vitePreload(() => import("./SplashPage-Dx6CNCHS.js"), true ? [] : void 0));
+const AuthPage = reactExports.lazy(() => __vitePreload(() => import("./AuthPage-R5Oeb6NG.js"), true ? __vite__mapDeps([0,1,2,3,4]) : void 0));
+const LanguageSelectPage = reactExports.lazy(() => __vitePreload(() => import("./LanguageSelectPage-BMzEaBro.js"), true ? __vite__mapDeps([5,1,2]) : void 0));
+const HomePage = reactExports.lazy(() => __vitePreload(() => import("./HomePage-CtLYZttC.js"), true ? __vite__mapDeps([6,2,7,8]) : void 0));
+const VideoPlayerPage = reactExports.lazy(() => __vitePreload(() => import("./VideoPlayerPage-BuS8cJIs.js"), true ? __vite__mapDeps([9,1,2,7,10,11,12,13,14]) : void 0));
+const VocabularyPage = reactExports.lazy(() => __vitePreload(() => import("./VocabularyPage-BPujFPSX.js"), true ? __vite__mapDeps([15,1,2,3,12,11,8]) : void 0));
+const QuizPage = reactExports.lazy(() => __vitePreload(() => import("./QuizPage-BjcUfQA0.js"), true ? __vite__mapDeps([16,1,2,7,10,11,14]) : void 0));
+const ProfilePage = reactExports.lazy(() => __vitePreload(() => import("./ProfilePage-C6Of8Xon.js"), true ? __vite__mapDeps([17,1,2,3,4,7,10,11,12,13,18]) : void 0));
+const LeaderboardPage = reactExports.lazy(() => __vitePreload(() => import("./LeaderboardPage-ChRTyPst.js"), true ? __vite__mapDeps([19,18]) : void 0));
 const queryClient$1 = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 3e4 } }
 });
@@ -31784,6 +31801,11 @@ const profileRoute = createRoute({
   path: "/profile",
   component: () => /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: null, children: /* @__PURE__ */ jsxRuntimeExports.jsx(ProfilePage, {}) })
 });
+const leaderboardRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/leaderboard",
+  component: () => /* @__PURE__ */ jsxRuntimeExports.jsx(reactExports.Suspense, { fallback: null, children: /* @__PURE__ */ jsxRuntimeExports.jsx(LeaderboardPage, {}) })
+});
 const routeTree = rootRoute.addChildren([
   splashRoute,
   authRoute,
@@ -31792,7 +31814,8 @@ const routeTree = rootRoute.addChildren([
   videoRoute,
   vocabularyRoute,
   quizRoute,
-  profileRoute
+  profileRoute,
+  leaderboardRoute
 ]);
 const router = createRouter({ routeTree });
 function App() {
@@ -31806,74 +31829,76 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   /* @__PURE__ */ jsxRuntimeExports.jsx(QueryClientProvider, { client: queryClient, children: /* @__PURE__ */ jsxRuntimeExports.jsx(InternetIdentityProvider, { children: /* @__PURE__ */ jsxRuntimeExports.jsx(App, {}) }) })
 );
 export {
-  notifyManager as $,
-  UnexpectedErrorCode as A,
+  replaceData as $,
+  UncertifiedRejectUpdateErrorCode as A,
   BookOpen as B,
   Certificate as C,
-  decode$2 as D,
+  UnexpectedErrorCode as D,
   ExternalError as E,
-  pendingThenable as F,
-  resolveEnabled as G,
+  decode$2 as F,
+  pendingThenable as G,
   HttpAgent as H,
   InputError as I,
-  shallowEqualObjects as J,
-  resolveStaleTime as K,
+  resolveEnabled as J,
+  shallowEqualObjects as K,
   Link as L,
   MissingRootKeyErrorCode as M,
-  noop$6 as N,
-  environmentManager as O,
+  resolveStaleTime as N,
+  noop$6 as O,
   ProtocolError as P,
   QueryResponseStatus as Q,
   React2 as R,
   Subscribable as S,
-  TimeoutWaitingForResponseErrorCode as T,
+  Trophy as T,
   User as U,
-  isValidTimeout as V,
-  timeUntilStale as W,
-  timeoutManager as X,
-  focusManager as Y,
-  fetchState as Z,
-  replaceData as _,
+  environmentManager as V,
+  isValidTimeout as W,
+  timeUntilStale as X,
+  timeoutManager as Y,
+  focusManager as Z,
+  fetchState as _,
   React$4 as a,
-  hashKey as a0,
-  getDefaultState as a1,
-  shouldThrowError as a2,
-  useInternetIdentity as a3,
-  createActorWithConfig as a4,
-  Record as a5,
+  notifyManager as a0,
+  hashKey as a1,
+  getDefaultState as a2,
+  shouldThrowError as a3,
+  useInternetIdentity as a4,
+  createActorWithConfig as a5,
   Variant as a6,
-  Service as a7,
-  Func as a8,
-  Vec as a9,
-  Opt as aa,
-  Text as ab,
-  Nat as ac,
+  Record as a7,
+  Service as a8,
+  Func as a9,
+  Vec as aa,
+  Opt as ab,
+  Null as ac,
   Int as ad,
-  Null as ae,
-  Principal2 as af,
+  Text as ae,
+  Nat as af,
+  Principal2 as ag,
+  Bool as ah,
   useParams as b,
   createLucideIcon as c,
   Brain as d,
   useQueryClient as e,
-  utf8ToBytes as f,
-  RequestStatusResponseStatus as g,
-  UnknownError as h,
-  RequestStatusDoneNoReplyErrorCode as i,
+  TimeoutWaitingForResponseErrorCode as f,
+  utf8ToBytes as g,
+  RequestStatusResponseStatus as h,
+  UnknownError as i,
   jsxRuntimeExports as j,
-  RejectError as k,
+  RequestStatusDoneNoReplyErrorCode as k,
   lookupResultToBuffer as l,
-  CertifiedRejectErrorCode as m,
-  UNREACHABLE_ERROR as n,
-  InvalidReadStateRequestErrorCode as o,
-  ReadRequestType as p,
-  Principal$1 as q,
+  RejectError as m,
+  CertifiedRejectErrorCode as n,
+  UNREACHABLE_ERROR as o,
+  InvalidReadStateRequestErrorCode as p,
+  ReadRequestType as q,
   reactExports as r,
-  IDL as s,
-  MissingCanisterIdErrorCode as t,
+  Principal$1 as s,
+  IDL as t,
   useNavigate as u,
-  encode$2 as v,
-  UncertifiedRejectErrorCode as w,
-  isV3ResponseBody as x,
-  isV2ResponseBody as y,
-  UncertifiedRejectUpdateErrorCode as z
+  MissingCanisterIdErrorCode as v,
+  encode$2 as w,
+  UncertifiedRejectErrorCode as x,
+  isV3ResponseBody as y,
+  isV2ResponseBody as z
 };

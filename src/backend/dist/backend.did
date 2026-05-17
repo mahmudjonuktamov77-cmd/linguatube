@@ -23,19 +23,28 @@ type QuizResult =
    totalQuestions: nat;
    videoId: VideoId;
  };
+type PublicUserProfile = 
+ record {
+   createdAt: Timestamp;
+   displayName: text;
+   email: text;
+   id: UserId;
+   language: Language;
+   points: int;
+   profileImage: text;
+   streak: nat;
+ };
 type Language = 
  variant {
    Russian;
    Uzbek;
  };
 service : {
+  getAllUsers: () -> (vec PublicUserProfile) query;
+  getIsAdmin: (email: text) -> (bool) query;
+  getLeaderboard: () -> (vec PublicUserProfile) query;
   getQuizResults: () -> (vec QuizResult) query;
-  getUserProfile: () ->
-   (opt record {
-          displayName: text;
-          id: UserId;
-          language: Language;
-        }) query;
+  getUserProfile: () -> (opt PublicUserProfile) query;
   getVocabulary: () -> (vec VocabEntry) query;
   getWatchedVideos: () -> (vec WatchedVideo) query;
   markVideoWatched: (videoId: VideoId) -> ();
@@ -44,5 +53,9 @@ service : {
   saveVocabularyWord: (englishText: text, translationText: text,
    sourceVideoId: VideoId) -> ();
   setDisplayName: (displayName: text) -> ();
+  setEmail: (email: text) -> ();
   setLanguagePreference: (language: Language) -> ();
+  setProfileImage: (imageUrl: text) -> ();
+  updateUserPoints: (points: int) -> ();
+  updateUserStreak: (streak: nat) -> ();
 }

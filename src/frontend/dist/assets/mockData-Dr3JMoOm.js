@@ -236,6 +236,91 @@ const MOCK_QUIZ_QUESTIONS = [
     options: ["weather", "is", "the", "beautiful"],
     correctIndex: 3,
     videoId: "v2"
+  },
+  {
+    id: "q6",
+    question: "Choose the correct past tense: 'Yesterday I ___ to the store.'",
+    options: ["go", "goes", "went", "gone"],
+    correctIndex: 2,
+    videoId: "v3"
+  },
+  {
+    id: "q7",
+    question: "Which article is correct? '___ apple a day keeps the doctor away.'",
+    options: ["A", "An", "The", "No article"],
+    correctIndex: 1,
+    videoId: "v3"
+  },
+  {
+    id: "q8",
+    question: "Fill in the blank: 'She ___ English every morning.'",
+    options: ["study", "studies", "studied", "studying"],
+    correctIndex: 1,
+    videoId: "v4"
+  },
+  {
+    id: "q9",
+    question: "What is the correct preposition? 'I am interested ___ learning English.'",
+    options: ["at", "on", "in", "for"],
+    correctIndex: 2,
+    videoId: "v4"
+  },
+  {
+    id: "q10",
+    question: "Which sentence uses the present perfect correctly?",
+    options: [
+      "I have went to school.",
+      "I have been to London twice.",
+      "She has go to the park.",
+      "They have ate dinner."
+    ],
+    correctIndex: 1,
+    videoId: "v5"
+  },
+  {
+    id: "q11",
+    question: "What does 'fluent' mean?",
+    options: [
+      "Speaking very slowly",
+      "Unable to speak a language",
+      "Speaking a language smoothly and naturally",
+      "Learning a language for the first time"
+    ],
+    correctIndex: 2,
+    videoId: "v5"
+  },
+  {
+    id: "q12",
+    question: "Choose the correct form: 'If I ___ rich, I would travel the world.'",
+    options: ["am", "was", "were", "be"],
+    correctIndex: 2,
+    videoId: "v6"
+  },
+  {
+    id: "q13",
+    question: "Which word means the opposite of 'ancient'?",
+    options: ["old", "modern", "historical", "traditional"],
+    correctIndex: 1,
+    videoId: "v6"
+  },
+  {
+    id: "q14",
+    question: "Fill in the blank: 'Can you ___ me how to get to the station?'",
+    options: ["say", "speak", "tell", "talk"],
+    correctIndex: 2,
+    videoId: "v7"
+  },
+  {
+    id: "q15",
+    question: "Which sentence is grammatically correct?",
+    options: [
+      "He don't like coffee.",
+      "She doesn't likes coffee.",
+      "They doesn't drink tea.",
+      "He doesn't like coffee."
+    ],
+    correctIndex: 3,
+    videoId: "v8"
   }
 ];
 export {

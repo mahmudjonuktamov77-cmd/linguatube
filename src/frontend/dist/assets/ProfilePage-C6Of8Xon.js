@@ -1,12 +1,14 @@
-import { c as createLucideIcon, r as reactExports, j as jsxRuntimeExports, u as useNavigate, U as User, B as BookOpen } from "./index-DtATHlMl.js";
-import { u as useLayoutEffect2, d as useControllableState, P as Primitive, b as composeEventHandlers, c as createContextScope } from "./index-Dv_gk6bD.js";
-import { u as useComposedRefs, c as cn } from "./utils-nrQbKtHB.js";
-import { M as MOCK_VIDEOS } from "./mockData-CmJHL0ad.js";
-import { u as useProgress, C as ChevronRight } from "./use-progress-D1FgCv8h.js";
-import { u as useVocabulary } from "./use-vocabulary-CWzSNDmK.js";
-import { P as Play } from "./play-BH6fhvcT.js";
-import { T as Trophy } from "./trophy-BpkEYwrk.js";
-import "./backend-4JeLCclE.js";
+import { c as createLucideIcon, r as reactExports, j as jsxRuntimeExports, u as useNavigate, U as User, B as BookOpen, T as Trophy } from "./index-DrKPtmAy.js";
+import { B as Button } from "./button-4M12RXIM.js";
+import { I as Input } from "./input-DT74L0GC.js";
+import { u as useLayoutEffect2, d as useControllableState, P as Primitive, b as composeEventHandlers, c as createContextScope, L as Label } from "./index-D8DwRm2I.js";
+import { u as useComposedRefs, c as cn } from "./utils-UfMkDFYN.js";
+import { M as MOCK_VIDEOS } from "./mockData-Dr3JMoOm.js";
+import { u as useProgress, C as ChevronRight } from "./use-progress-CQP7lGn1.js";
+import { u as useVocabulary } from "./use-vocabulary-BU-v98yY.js";
+import { P as Play, X } from "./x-pmwU_wH-.js";
+import { F as Flame } from "./flame-wzMjBhzg.js";
+import "./backend-B89qqLjz.js";
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -25,15 +27,11 @@ const Clock = createLucideIcon("clock", __iconNode$3);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$2 = [
-  [
-    "path",
-    {
-      d: "M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z",
-      key: "96xj49"
-    }
-  ]
+  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
+  ["path", { d: "M12 16v-4", key: "1dtifu" }],
+  ["path", { d: "M12 8h.01", key: "e9boi3" }]
 ];
-const Flame = createLucideIcon("flame", __iconNode$2);
+const Info = createLucideIcon("info", __iconNode$2);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -41,11 +39,9 @@ const Flame = createLucideIcon("flame", __iconNode$2);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode$1 = [
-  ["circle", { cx: "12", cy: "12", r: "10", key: "1mglay" }],
-  ["path", { d: "M12 16v-4", key: "1dtifu" }],
-  ["path", { d: "M12 8h.01", key: "e9boi3" }]
+  ["path", { d: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z", key: "a7tn18" }]
 ];
-const Info = createLucideIcon("info", __iconNode$1);
+const Moon = createLucideIcon("moon", __iconNode$1);
 /**
  * @license lucide-react v0.511.0 - ISC
  *
@@ -53,9 +49,11 @@ const Info = createLucideIcon("info", __iconNode$1);
  * See the LICENSE file in the root directory of this source tree.
  */
 const __iconNode = [
-  ["path", { d: "M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z", key: "a7tn18" }]
+  ["path", { d: "M12 3v12", key: "1x0j5s" }],
+  ["path", { d: "m17 8-5-5-5 5", key: "7q97r8" }],
+  ["path", { d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4", key: "ih7n3h" }]
 ];
-const Moon = createLucideIcon("moon", __iconNode);
+const Upload = createLucideIcon("upload", __iconNode);
 function usePrevious(value) {
   const ref = reactExports.useRef({ value, previous: value });
   return reactExports.useMemo(() => {
@@ -265,6 +263,25 @@ function Switch({
     }
   );
 }
+const ADMIN_EMAIL = "mahmudjonuktamov77@gmail.com";
+const UPLOAD_CATEGORIES = [
+  "Podcasts",
+  "Conversations",
+  "Stories",
+  "Songs",
+  "Interviews",
+  "Beginner",
+  "Intermediate",
+  "Advanced"
+];
+const UPLOAD_LEVELS = ["Beginner", "Intermediate", "Advanced"];
+const INITIAL_FORM = {
+  title: "",
+  category: "Podcasts",
+  level: "Beginner",
+  youtubeUrl: "",
+  description: ""
+};
 const LANG_MAP = {
   uzbek: { label: "O'zbek", flag: "🇺🇿" },
   russian: { label: "Russian", flag: "🇷🇺" }
@@ -404,6 +421,12 @@ function ProfilePage() {
   const navigate = useNavigate();
   const { watchedVideos, quizResults, totalMinutesLearned } = useProgress();
   const { totalWords } = useVocabulary();
+  const [showUpload, setShowUpload] = reactExports.useState(false);
+  const [uploadForm, setUploadForm] = reactExports.useState(INITIAL_FORM);
+  const [uploadSuccess, setUploadSuccess] = reactExports.useState(false);
+  const authRaw = localStorage.getItem("linguatube_auth");
+  const authData = authRaw ? JSON.parse(authRaw) : null;
+  const isAdmin = (authData == null ? void 0 : authData.email) === ADMIN_EMAIL;
   const language = localStorage.getItem("linguatube_language") ?? "uzbek";
   const langInfo = LANG_MAP[language] ?? { label: language, flag: "🌐" };
   const avgScore = quizResults.length > 0 ? Math.round(
@@ -422,12 +445,19 @@ function ProfilePage() {
           /* @__PURE__ */ jsxRuntimeExports.jsx("h1", { className: "text-xl font-bold font-display text-foreground mb-5", children: "Profile" }),
           /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex items-center gap-4 mb-6", children: [
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "relative", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 rounded-2xl bg-gradient-brand flex items-center justify-center shadow-glow flex-shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(User, { size: 28, className: "text-white" }) }),
+              (authData == null ? void 0 : authData.profileImage) ? /* @__PURE__ */ jsxRuntimeExports.jsx(
+                "img",
+                {
+                  src: authData.profileImage,
+                  alt: authData.name ?? "User",
+                  className: "w-16 h-16 rounded-2xl object-cover shadow-glow"
+                }
+              ) : /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-16 h-16 rounded-2xl bg-gradient-brand flex items-center justify-center shadow-glow flex-shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(User, { size: 28, className: "text-white" }) }),
               /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "absolute -bottom-1 -right-1 w-5 h-5 rounded-full bg-accent border-2 border-card" })
             ] }),
             /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-1 min-w-0", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-bold text-foreground text-base", children: "Language Learner" }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm mt-0.5", children: "Learning English" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-bold text-foreground text-base", children: (authData == null ? void 0 : authData.name) ?? "Language Learner" }),
+              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm mt-0.5", children: (authData == null ? void 0 : authData.email) ?? "Learning English" }),
               /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "inline-flex items-center gap-1.5 mt-2 px-2.5 py-1 rounded-full bg-primary/15 border border-primary/30", children: [
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-sm", children: langInfo.flag }),
                 /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "text-primary text-xs font-semibold", children: langInfo.label })
@@ -649,9 +679,272 @@ function ProfilePage() {
                 },
                 ocid: "profile.about_button"
               }
+            ),
+            isAdmin && /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "button",
+              {
+                type: "button",
+                "data-ocid": "profile.upload_video_button",
+                onClick: () => {
+                  setShowUpload(true);
+                  setUploadSuccess(false);
+                  setUploadForm(INITIAL_FORM);
+                },
+                className: "w-full flex items-center gap-3 bg-primary/10 rounded-2xl p-4 border border-primary/30 hover:border-primary/60 transition-smooth",
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-8 h-8 rounded-xl bg-primary/20 flex items-center justify-center flex-shrink-0", children: /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { size: 15, className: "text-primary" }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("span", { className: "flex-1 text-primary text-sm font-semibold text-left", children: "Upload Video" }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "span",
+                    {
+                      className: "text-[10px] px-2 py-0.5 rounded-full font-bold",
+                      style: {
+                        background: "oklch(0.58 0.18 22 / 0.15)",
+                        color: "oklch(0.7 0.18 22)"
+                      },
+                      children: "ADMIN"
+                    }
+                  ),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(ChevronRight, { size: 16, className: "text-primary flex-shrink-0" })
+                ]
+              }
             )
           ] })
         ] }),
+        showUpload && /* @__PURE__ */ jsxRuntimeExports.jsx(
+          "dialog",
+          {
+            open: true,
+            className: "fixed inset-0 z-50 m-0 p-0 max-w-none max-h-none w-full h-full border-0 bg-transparent flex items-end sm:items-center justify-center px-0 sm:px-4",
+            style: {
+              background: "rgba(0,0,0,0.80)",
+              backdropFilter: "blur(8px)"
+            },
+            onClick: (e) => {
+              if (e.target === e.currentTarget) setShowUpload(false);
+            },
+            onKeyDown: (e) => {
+              if ((e.key === "Escape" || e.key === "Enter") && e.target === e.currentTarget)
+                setShowUpload(false);
+            },
+            tabIndex: -1,
+            children: /* @__PURE__ */ jsxRuntimeExports.jsxs(
+              "div",
+              {
+                "data-ocid": "profile.upload_dialog",
+                className: "w-full sm:max-w-lg rounded-t-3xl sm:rounded-3xl shadow-premium animate-fade-up",
+                style: {
+                  background: "var(--card)",
+                  border: "1.5px solid oklch(0.2 0.008 265)",
+                  maxHeight: "88dvh",
+                  display: "flex",
+                  flexDirection: "column"
+                },
+                children: [
+                  /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "flex-shrink-0 pt-4 pb-0 px-6 sm:hidden", children: /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "w-10 h-1 rounded-full bg-border/60 mx-auto" }) }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "flex-shrink-0 flex items-center justify-between px-6 pt-5 pb-4", children: [
+                    /* @__PURE__ */ jsxRuntimeExports.jsx("h3", { className: "font-display font-semibold text-foreground text-lg", children: "Upload Video" }),
+                    /* @__PURE__ */ jsxRuntimeExports.jsx(
+                      "button",
+                      {
+                        type: "button",
+                        "data-ocid": "profile.upload_close_button",
+                        onClick: () => setShowUpload(false),
+                        className: "w-9 h-9 rounded-full bg-muted/60 flex items-center justify-center text-muted-foreground hover:text-foreground transition-smooth",
+                        "aria-label": "Close",
+                        children: /* @__PURE__ */ jsxRuntimeExports.jsx(X, { size: 15 })
+                      }
+                    )
+                  ] }),
+                  /* @__PURE__ */ jsxRuntimeExports.jsx(
+                    "div",
+                    {
+                      className: "flex-1 overflow-y-auto px-6 pb-8",
+                      style: { overscrollBehavior: "contain" },
+                      children: uploadSuccess ? /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "div",
+                        {
+                          "data-ocid": "profile.upload_success_state",
+                          className: "flex flex-col items-center gap-4 py-10 text-center",
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "div",
+                              {
+                                className: "w-16 h-16 rounded-full flex items-center justify-center",
+                                style: {
+                                  background: "oklch(0.65 0.15 142 / 0.15)",
+                                  border: "2px solid oklch(0.65 0.15 142 / 0.4)"
+                                },
+                                children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                  "svg",
+                                  {
+                                    width: "28",
+                                    height: "28",
+                                    viewBox: "0 0 28 28",
+                                    fill: "none",
+                                    "aria-hidden": "true",
+                                    children: /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                      "path",
+                                      {
+                                        d: "M5 14L11 20L23 8",
+                                        stroke: "oklch(0.65 0.15 142)",
+                                        strokeWidth: "2.5",
+                                        strokeLinecap: "round",
+                                        strokeLinejoin: "round"
+                                      }
+                                    )
+                                  }
+                                )
+                              }
+                            ),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "font-semibold text-foreground", children: "Video uploaded!" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx("p", { className: "text-muted-foreground text-sm mt-1", children: "It will appear in the home feed." })
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsx(
+                              "button",
+                              {
+                                type: "button",
+                                onClick: () => setShowUpload(false),
+                                className: "text-sm text-primary hover:opacity-80 transition-smooth",
+                                children: "Close"
+                              }
+                            )
+                          ]
+                        }
+                      ) : /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                        "form",
+                        {
+                          onSubmit: (e) => {
+                            var _a;
+                            e.preventDefault();
+                            const existing = JSON.parse(
+                              localStorage.getItem("linguatube_custom_videos") ?? "[]"
+                            );
+                            const newVideo = {
+                              id: `custom_${Date.now()}`,
+                              title: uploadForm.title,
+                              category: uploadForm.category,
+                              level: uploadForm.level,
+                              thumbnail: uploadForm.youtubeUrl ? `https://img.youtube.com/vi/${((_a = uploadForm.youtubeUrl.match(/(?:v=|youtu\.be\/)([\w-]{11})/)) == null ? void 0 : _a[1]) ?? "dQw4w9WgXcQ"}/mqdefault.jpg` : "https://picsum.photos/seed/custom/400/225",
+                              duration: "0:00",
+                              channelName: "Admin",
+                              channelAvatar: "https://ui-avatars.com/api/?name=Admin&background=f97316&color=fff",
+                              views: "0",
+                              uploadedAt: "Just now",
+                              description: uploadForm.description
+                            };
+                            localStorage.setItem(
+                              "linguatube_custom_videos",
+                              JSON.stringify([newVideo, ...existing])
+                            );
+                            setUploadSuccess(true);
+                          },
+                          className: "space-y-5",
+                          children: [
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(Label, { className: "text-foreground/80 text-sm", children: "Title" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                Input,
+                                {
+                                  "data-ocid": "profile.upload_title_input",
+                                  placeholder: "Video title",
+                                  value: uploadForm.title,
+                                  onChange: (e) => setUploadForm((p) => ({ ...p, title: e.target.value })),
+                                  required: true,
+                                  className: "bg-background border-border/60 h-11 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary/40 transition-smooth"
+                                }
+                              )
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "grid grid-cols-2 gap-3", children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(Label, { className: "text-foreground/80 text-sm", children: "Category" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                  "select",
+                                  {
+                                    "data-ocid": "profile.upload_category_select",
+                                    value: uploadForm.category,
+                                    onChange: (e) => setUploadForm((p) => ({
+                                      ...p,
+                                      category: e.target.value
+                                    })),
+                                    className: "w-full h-11 rounded-xl border border-border/60 bg-background text-foreground text-sm px-3 focus:border-primary focus:outline-none transition-smooth",
+                                    children: UPLOAD_CATEGORIES.map((c) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: c, children: c }, c))
+                                  }
+                                )
+                              ] }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(Label, { className: "text-foreground/80 text-sm", children: "Level" }),
+                                /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                  "select",
+                                  {
+                                    "data-ocid": "profile.upload_level_select",
+                                    value: uploadForm.level,
+                                    onChange: (e) => setUploadForm((p) => ({
+                                      ...p,
+                                      level: e.target.value
+                                    })),
+                                    className: "w-full h-11 rounded-xl border border-border/60 bg-background text-foreground text-sm px-3 focus:border-primary focus:outline-none transition-smooth",
+                                    children: UPLOAD_LEVELS.map((l) => /* @__PURE__ */ jsxRuntimeExports.jsx("option", { value: l, children: l }, l))
+                                  }
+                                )
+                              ] })
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(Label, { className: "text-foreground/80 text-sm", children: "YouTube URL" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                Input,
+                                {
+                                  "data-ocid": "profile.upload_youtube_input",
+                                  placeholder: "https://youtube.com/watch?v=...",
+                                  value: uploadForm.youtubeUrl,
+                                  onChange: (e) => setUploadForm((p) => ({
+                                    ...p,
+                                    youtubeUrl: e.target.value
+                                  })),
+                                  className: "bg-background border-border/60 h-11 rounded-xl focus:border-primary focus:ring-1 focus:ring-primary/40 transition-smooth"
+                                }
+                              )
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "space-y-1.5", children: [
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(Label, { className: "text-foreground/80 text-sm", children: "Description" }),
+                              /* @__PURE__ */ jsxRuntimeExports.jsx(
+                                "textarea",
+                                {
+                                  "data-ocid": "profile.upload_description_textarea",
+                                  placeholder: "Brief description...",
+                                  value: uploadForm.description,
+                                  onChange: (e) => setUploadForm((p) => ({
+                                    ...p,
+                                    description: e.target.value
+                                  })),
+                                  rows: 3,
+                                  className: "w-full rounded-xl border border-border/60 bg-background text-foreground text-sm px-3 py-3 focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/40 transition-smooth resize-none placeholder:text-muted-foreground/50"
+                                }
+                              )
+                            ] }),
+                            /* @__PURE__ */ jsxRuntimeExports.jsxs(
+                              Button,
+                              {
+                                type: "submit",
+                                "data-ocid": "profile.upload_submit_button",
+                                className: "w-full h-12 rounded-xl text-white font-semibold text-base shadow-glow bg-gradient-brand",
+                                children: [
+                                  /* @__PURE__ */ jsxRuntimeExports.jsx(Upload, { size: 16, className: "mr-2" }),
+                                  "Upload Video"
+                                ]
+                              }
+                            )
+                          ]
+                        }
+                      )
+                    }
+                  )
+                ]
+              }
+            )
+          }
+        ),
         /* @__PURE__ */ jsxRuntimeExports.jsx("div", { className: "px-4 pb-2 mt-auto", children: /* @__PURE__ */ jsxRuntimeExports.jsxs("p", { className: "text-center text-xs text-muted-foreground", children: [
           "© ",
           (/* @__PURE__ */ new Date()).getFullYear(),

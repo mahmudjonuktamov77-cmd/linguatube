@@ -18,6 +18,7 @@ const VideoPlayerPage = lazy(() => import("@/pages/VideoPlayerPage"));
 const VocabularyPage = lazy(() => import("@/pages/VocabularyPage"));
 const QuizPage = lazy(() => import("@/pages/QuizPage"));
 const ProfilePage = lazy(() => import("@/pages/ProfilePage"));
+const LeaderboardPage = lazy(() => import("@/pages/LeaderboardPage"));
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 1, staleTime: 30_000 } },
@@ -112,6 +113,16 @@ const profileRoute = createRoute({
   ),
 });
 
+const leaderboardRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/leaderboard",
+  component: () => (
+    <Suspense fallback={null}>
+      <LeaderboardPage />
+    </Suspense>
+  ),
+});
+
 const routeTree = rootRoute.addChildren([
   splashRoute,
   authRoute,
@@ -121,6 +132,7 @@ const routeTree = rootRoute.addChildren([
   vocabularyRoute,
   quizRoute,
   profileRoute,
+  leaderboardRoute,
 ]);
 
 const router = createRouter({ routeTree });
